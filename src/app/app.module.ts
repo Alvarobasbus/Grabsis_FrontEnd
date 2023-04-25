@@ -3,14 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrarTurnoComponent } from './Turno/registrar-turno/registrar-turno.component';
+import { PrincipalComponent } from './inicio/principal/principal.component';
+import { IniciarSesionComponent } from './inicio/iniciar-sesion/iniciar-sesion.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrarTurnoComponent,
+    PrincipalComponent,
+    IniciarSesionComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
