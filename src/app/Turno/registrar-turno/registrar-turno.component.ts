@@ -18,6 +18,9 @@ export class RegistrarTurnoComponent implements OnInit {
   formulario: FormGroup;
   provincias: Provincia[];
   pro: Provincia;
+  user: boolean;
+  vehiculo: boolean;
+  turno: boolean;
 
   private subscripcion =new Subscription();
 
@@ -29,6 +32,9 @@ export class RegistrarTurnoComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.user=true;
+    this.vehiculo=false;
+    this.turno=false;
     this.formulario=this.formBuilder.group({
       documento: [, Validators.required],
       nombre: [, Validators.required],
@@ -66,7 +72,7 @@ export class RegistrarTurnoComponent implements OnInit {
   }
 
 
-  guardar(){
+  guardarUsuario(){
     if(this.formulario.invalid){
       alert('Formulario invalido')
       return
@@ -90,6 +96,8 @@ export class RegistrarTurnoComponent implements OnInit {
       this.usuarioService.guardar(this.usuario).subscribe({
         next: ()=>{
           alert('Usuario registrado correctamente')
+          this.user=false;
+          this.vehiculo=true;
           console.log(this.usuario)
         },
         error: ()=> {
