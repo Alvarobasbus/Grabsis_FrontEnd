@@ -7,6 +7,7 @@ export class Usuario{
     telefono: number;
     email: string;
     domicilio: string;
-    provincia: Provincia;
+    provincia?: Provincia;
+   //idProvincia?: number;
 
 }

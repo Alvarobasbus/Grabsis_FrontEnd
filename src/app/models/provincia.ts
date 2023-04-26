@@ -1,4 +1,4 @@
 export class Provincia{
-    id_provincia: number;
+    idProvincia: number;
     nombre: string;
 }
