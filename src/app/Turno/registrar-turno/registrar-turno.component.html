@@ -1,0 +1,76 @@
+<form [formGroup]="formulario" *ngIf="user">
+    <div class="container">
+<h1>Solicitud de Turno</h1>
+<p>Datos del usuario</p>
+
+    </div>
+
+<br>
+<br>
+    <div class="container">
+        <div class="mb-3">
+            <label for="inputDocumento" class="form-label">Documento:</label>
+            <input type="text" class="form-control" id="inputDocumento" formControlName="documento">
+        </div>
+    
+        <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="inputApellido" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
+        </div>
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="inputEmail" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <label for="inputTelefono" class="form-label">Telefono:</label>
+            <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
+        </div>
+
+        <div class="mb-3">
+            <label for="provincia" class="form-label">Provincia:</label>
+            <select class="form-select" id="provincia" formControlName="provincia">
+                <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
+                    {{ lst.nombre }}
+                </option>
+            </select>
+          </div>
+    
+        <div class="mb-3">
+            <label for="inputDomicilio" class="form-label">Domicilio:</label>
+            <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
+        </div>
+        
+    
+    
+        <button type="submit" class="btn btn-primary" (click)="guardarUsuario()">Guardar</button>
+        <button type="submit" class="btn btn-secondary">limpiar</button>
+
+
+    </div>
+
+</form>
+
+<div *ngIf="vehiculo" class="container">
+    <div>
+        <h1>Solicitud de Turno</h1>
+        <p>Datos del Vehiculo</p>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <form [formGroup]="formulario">
+
+
+
+        </form>
+
+        
+    </div>
+
+</div>
