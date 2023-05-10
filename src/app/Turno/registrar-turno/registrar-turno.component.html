@@ -1,76 +1,172 @@
-<form [formGroup]="formulario" *ngIf="user">
-    <div class="container">
-<h1>Solicitud de Turno</h1>
-<p>Datos del usuario</p>
-
-    </div>
-
-<br>
-<br>
-    <div class="container">
-        <div class="mb-3">
-            <label for="inputDocumento" class="form-label">Documento:</label>
-            <input type="text" class="form-control" id="inputDocumento" formControlName="documento">
+<div >  
+    <form [formGroup]="formulario" *ngIf="user">
+        <div class="container">
+    <h1>Solicitud de Turno</h1>
+    <p>Datos del usuario</p>
+    
         </div>
     
-        <div class="mb-3">
-            <label for="inputNombre" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
-        </div>
-        <div class="mb-3">
-            <label for="inputApellido" class="form-label">Apellido:</label>
-            <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
-        </div>
-        <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="inputEmail" formControlName="email">
-        </div>
-        <div class="mb-3">
-            <label for="inputTelefono" class="form-label">Telefono:</label>
-            <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
-        </div>
-
-        <div class="mb-3">
-            <label for="provincia" class="form-label">Provincia:</label>
-            <select class="form-select" id="provincia" formControlName="provincia">
-                <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
-                    {{ lst.nombre }}
-                </option>
-            </select>
-          </div>
-    
-        <div class="mb-3">
-            <label for="inputDomicilio" class="form-label">Domicilio:</label>
-            <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
-        </div>
+    <br>
+    <br>
+        <div class="container">
+            <div class="mb-3">
+                <label for="inputDocumento" class="form-label">Documento:</label>
+                <input type="text" class="form-control" id="inputDocumento" formControlName="documento">
+            </div>
         
+            <div class="mb-3">
+                <label for="inputNombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
+            </div>
+            <div class="mb-3">
+                <label for="inputApellido" class="form-label">Apellido:</label>
+                <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
+            </div>
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="inputEmail" formControlName="email">
+            </div>
+            <div class="mb-3">
+                <label for="inputTelefono" class="form-label">Telefono:</label>
+                <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
+            </div>
+    
+            <div class="mb-3">
+                <label for="provincia" class="form-label">Provincia:</label>
+                <select class="form-select" id="provincia" formControlName="provincia">
+                    <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
+                        {{ lst.nombre }}
+                    </option>
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="inputDomicilio" class="form-label">Domicilio:</label>
+                <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
+            </div>
+            
+        
+        
+            <button type="submit" class="btn btn-primary" (click)="guardarUsuario()">Guardar</button>
+            <button type="submit" class="btn btn-secondary">limpiar</button>
     
     
-        <button type="submit" class="btn btn-primary" (click)="guardarUsuario()">Guardar</button>
-        <button type="submit" class="btn btn-secondary">limpiar</button>
-
-
+        </div>
+    
+    </form>
+    
+    <div *ngIf="mostrarVehiculo" class="container">
+        <div>
+            <h1>Solicitud de Turno</h1>
+            <p>Datos del Vehiculo</p>
+        </div>
+    
+        <br>
+        <br>
+    
+        <div>
+            <form [formGroup]="formVehiculo" >
+                 
+                <div class="mb-3">
+                    <label for="inputPatente" class="form-label">Patente:</label>
+                    <input type="text" class="form-control" id="inputPatente" formControlName="patente">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo:</label>
+                    <select class="form-select" id="tipo" formControlName="tipo">
+                        <option value="AUTOMOVIL">AUTOMOVIL</option>
+                        <option value="MOTOVEHICULO">MOTOVEHICULO</option>
+                        <option value="CAMION">CAMION</option>
+                        <option value="ACOPLADO">ACOPLADO</option>
+                        <option value="MAQUINARIA AGRICOLA">MAQUINARIA AGRICOLA</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="marca" class="form-label">Marca:</label>
+                    <select class="form-select" id="marca" formControlName="marca">
+                        <option *ngFor="let lst of marcas" [value]="lst.idMarca">
+                            {{ lst.descripcion }}
+                        </option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="inputModelo" class="form-label">Modelo:</label>
+                    <input type="text" class="form-control" id="inputModelo" formControlName="modelo">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="inputChasis" class="form-label">Numero de chasis:</label>
+                    <input type="text" class="form-control" id="inputChasis" formControlName="chasis">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="inputMotor" class="form-label">Numero de motor:</label>
+                    <input type="text" class="form-control" id="inputMotor" formControlName="motor">
+                </div>
+    
+               
+    
+    
+    
+                <button type="submit" class="btn btn-primary" (click)="guardarvehiculo()">Guardar</button>
+                <button type="submit" class="btn btn-secondary">limpiar</button>
+    
+    
+            </form>
+    
+            
+        </div>
+    
     </div>
-
-</form>
-
-<div *ngIf="vehiculo" class="container">
-    <div>
+    
+    
+    <div *ngIf="mostrarRegistroTurno" class="container">
         <h1>Solicitud de Turno</h1>
-        <p>Datos del Vehiculo</p>
-    </div>
-
-    <br>
-    <br>
-
-    <div>
-        <form [formGroup]="formulario">
-
-
-
+        <p>Seleccione Fecha y Hora</p>
+        <br>
+        <form [formGroup]="formTurno" >
+    
+    
+    
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="inputFecha" class="form-label">Seleccione fecha:</label>
+                <input type="date" class="form-control" id="inputFecha" formControlName="fecha">
+            </div>
+    
+              
+              
+        </div>
+    
+        <div class="mb-3" > 
+    
+            <select class="form-select" size="auto" id="hora" formControlName="hora">
+                <option value="1" disabled selected>Seleccione un horario</option>
+                <option value="8:00">8:00</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="9:30">9:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+            </select>
+    
+        </div>
+    
+        <button type="submit" class="btn btn-primary" (click)="confirmarTurno()">Confirmar turno</button>
+        <button type="submit" class="btn btn-secondary">Cancelar</button>
+    
+    
         </form>
-
-        
+    
     </div>
+    
 
 </div>
+

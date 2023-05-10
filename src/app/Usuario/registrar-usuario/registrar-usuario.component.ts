@@ -1,0 +1,97 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Provincia } from 'src/app/models/provincia';
+import { Usuario } from 'src/app/models/usuario';
+import { ProvinciaService } from 'src/app/services/provincia.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+
+@Component({
+  selector: 'app-registrar-usuario',
+  templateUrl: './registrar-usuario.component.html',
+  styleUrls: ['./registrar-usuario.component.css']
+})
+export class RegistrarUsuarioComponent implements OnInit {
+
+
+  usuario: Usuario;
+  formulario: FormGroup;
+  provincias: Provincia[];
+  pro: Provincia;
+  private subscripcion =new Subscription();
+
+constructor(private formBuilder: FormBuilder, private router: Router, private provinciaService: ProvinciaService,
+  private usuarioService: UsuarioService){
+
+}
+
+
+  ngOnInit(): void {
+    this.formulario=this.formBuilder.group({
+      documento: [, Validators.required],
+      nombre: [, Validators.required],
+      apellido: [, Validators.required],
+      email: [, Validators.required],
+      telefono: [, Validators.required],
+      domicilio: [, Validators.required],
+      provincia: [, Validators.required]
+
+    })
+
+
+
+    this.subscripcion.add(
+      this.provinciaService.obtenerTodas().subscribe({
+        next: (respuesta) => this.provincias=respuesta,
+        error: () => {
+          alert('Error al cargar las provincias');
+        },
+      })
+    );
+
+
+    this.subscripcion.add(
+      this.formulario.controls['provincia'].valueChanges.subscribe({
+        next: (valor) =>{
+          this.provinciaService.obtenerPorId(valor).subscribe({
+            next: (respuesta) => this.pro = respuesta,
+            error: () => alert('error al intentar guardar la provincia seleccionada')
+          })
+        }
+      })
+    )
+  }
+
+  guardarUsuario(){
+    if(this.formulario.invalid){
+      alert('Formulario invalido')
+      return
+    }
+
+    this.usuario=this.formulario.value;
+    this.usuario.documento= this.formulario.controls['documento'].value;
+    this.usuario.nombre= this.formulario.controls['nombre'].value;
+    this.usuario.apellido= this.formulario.controls['apellido'].value;
+    this.usuario.email= this.formulario.controls['email'].value;
+    this.usuario.telefono= this.formulario.controls['telefono'].value;
+    this.usuario.domicilio= this.formulario.controls['domicilio'].value;
+    this.usuario.provincia=this.pro;
+
+
+    this.subscripcion.add(
+      this.usuarioService.guardar(this.usuario).subscribe({
+        next: ()=>{
+          alert('Usuario registrado correctamente')
+        },
+        error: ()=> {
+         alert('error al registrar el usuario')
+        }
+      })
+      
+    )
+  }
+
+ 
+
+}

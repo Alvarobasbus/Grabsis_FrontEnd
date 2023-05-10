@@ -7,5 +7,6 @@ export class Empleado{
     apellido: string;
     contrasenia: string;
     rol: Rol;
+    isDeleted: boolean;
 
 }

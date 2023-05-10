@@ -1,0 +1,84 @@
+<div class="container">
+    <br>
+    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-3" *ngIf="modificar==false">
+
+    <form [formGroup]="formulario">
+        <div class="row justify-content-md-center mt-1">
+            <h5>Ingrese numero de documento del usuario</h5>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-outline col-12 mb-3 mt-1">
+                <input type="number" id="documento" class="form-control form-control-lg" formControlName="dni"/>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="text-center text-lg-start mt-2 ">
+                <button type="button" class="btn btn-primary btn-lg"
+                  style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="buscar()">Buscar</button>
+              </div>
+           
+        </div>
+    </form>
+    
+    </div>
+
+
+    <div *ngIf="modificar">
+        <form [formGroup]="formulario2" >
+            <div class="container">
+        <h3>Modificar el usuario:  {{usuario.apellido + ' ' + usuario.nombre}}</h3>
+        
+        
+            </div>
+        
+        <br>
+        <br>
+            <div class="container">
+                <div class="mb-3" >
+                    <label for="inputDocumento" class="form-label">Documento:</label>
+                    <input readonly type="text" class="form-control" id="inputDocumento" formControlName="documento">
+                </div>
+            
+                <div class="mb-3">
+                    <label for="inputNombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="inputApellido" class="form-label">Apellido:</label>
+                    <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="inputEmail" formControlName="email">
+                </div>
+                <div class="mb-3">
+                    <label for="inputTelefono" class="form-label">Telefono:</label>
+                    <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="provincia" class="form-label">Provincia:</label>
+                    <select class="form-select" id="provincia" formControlName="provincia">
+                        <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
+                            {{ lst.nombre }}
+                        </option>
+                    </select>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="inputDomicilio" class="form-label">Domicilio:</label>
+                    <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
+                </div>
+                
+            
+            
+                <button type="submit" class="btn btn-primary" (click)="guardarCambios()">Guardar Cambios</button>
+                <button type="submit" class="btn btn-danger" *ngIf="deteled==false" (click)="eliminar()">Eliminar</button>
+                <button type="submit" class="btn btn-danger" *ngIf="deteled==true" (click)="activar()">Activar</button>
+        
+            </div>
+        
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,46 @@
+<form [formGroup]="formulario">
+    <div class="container">
+<h3>Alta de empleado</h3>
+
+
+    </div>
+
+<br>
+<br>
+    <div class="container">
+        <div class="mb-3">
+            <label for="inputDocumento" class="form-label">Documento:</label>
+            <input type="text" class="form-control" id="inputDocumento" formControlName="documento" >
+        </div>
+    
+        <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="inputNombre" formControlName="nombre" >
+        </div>
+        <div class="mb-3">
+            <label for="inputApellido" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" id="inputApellido" formControlName="apellido" >
+        </div>
+        <div class="mb-3">
+            <label for="inputcontrasenia" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="inputcontrasenia" formControlName="contrasenia" >
+        </div>
+        <div class="mb-3">
+            <label for="rol" class="form-label">Rol:</label>
+            <select class="form-select" id="rol" formControlName="rol">
+                <option *ngFor="let lst of roles" [value]="lst.id">
+                    {{ lst.descripcion }}
+                </option>
+            </select>
+        </div>
+
+        
+    
+    
+        <button type="submit" class="btn btn-primary" (click)="guardarEmpleado()">Guardar</button>
+        <button type="submit" class="btn btn-secondary">limpiar</button>
+
+
+    </div>
+
+</form>

@@ -9,5 +9,6 @@ export class Usuario{
     domicilio: string;
     provincia?: Provincia;
    //idProvincia?: number;
+   isDeleted: boolean=false;
 
 }

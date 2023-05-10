@@ -13,4 +13,11 @@ export class MarcaService {
   obtenerTodas(): Observable<Marca[]>{
     return this.http.get<Marca[]>(this.URL);
   }
+
+  obtenerPorId(id: string): Observable<Marca>{
+    return this.http.get<Marca>(`${this.URL}/${id}`);
+  }
+  guardar(marca: Marca): Observable<Marca>{
+    return this.http.post<Marca>(`${this.URL}/crear`, marca)
+  }
 }
