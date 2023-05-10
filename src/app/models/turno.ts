@@ -3,7 +3,7 @@ import { Usuario } from "./usuario";
 import { Vehiculo } from "./vehiculo";
 
 export class Turno{
-    id: number;
+    idTurno: number;
     fecha: Date;
     hora: string;
     pagado: boolean;
@@ -12,6 +12,7 @@ export class Turno{
     usuario: Usuario;
     vehiculo: Vehiculo;
     formulario: string;
+    isDeleted: boolean=false;
 
 
 }

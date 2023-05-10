@@ -15,4 +15,17 @@ export class UsuarioService {
   guardar(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.URL}/crear`, usuario)
   }
+
+  obtenerPorId(dni: number): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.URL}/${dni}`);
+  }
+
+  delete(id: number): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.URL}/delete/${id}`)
+  }
+
+  activar(id: number): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.URL}/activar/${id}`)
+  }
+
 }

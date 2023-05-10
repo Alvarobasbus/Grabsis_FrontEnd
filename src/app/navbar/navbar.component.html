@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">GRABSIS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul *ngIf="currentID>0" class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Caja</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Turno
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="turno" routerLinkActive="active" href="">Registrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="listaturno" routerLinkActive="active" href="">Listado</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Empleado
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="registrarempleado" routerLinkActive="active" href="">Registrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="listaempleado" routerLinkActive="active" href="">Listado</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="registrarUsuario" routerLinkActive="active" href="">Registrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item"  routerLink="modificarusuario" routerLinkActive="active" href="">Modificar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="eliminarusuario" routerLinkActive="active" href="">Eliminar</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Marca
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="marca" routerLinkActive="active" href="">Registrar</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <ul  class="navbar-nav ms-auto ">
+            <li class="nav-item" *ngIf="currentID==0">
+                <a class="nav-link" routerLink="turno" routerLinkActive="active"  href="#">Solicitar Turno</a>
+            </li>
+            <li class="nav-item" *ngIf="currentID==0">
+                <a class="nav-link" routerLink="login" routerLinkActive="active" href="#">Iniciar Sesion</a>
+            </li>
+            <li *ngIf="currentID>0" class="nav-item">
+              <span>{{empleado.apellido + " " + empleado.nombre}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
