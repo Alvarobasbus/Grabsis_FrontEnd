@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Empleado } from '../models/empleado';
 
 @Injectable({
@@ -8,7 +8,8 @@ import { Empleado } from '../models/empleado';
 export class HelperService {
 
   private currentEmpleadoSubject: BehaviorSubject<Empleado> = new BehaviorSubject({} as Empleado);
-  public readonly currentEmpleado: Observable<Empleado> = this.currentEmpleadoSubject.asObservable();
+  public readonly currentEmpleado$: Observable<Empleado> = this.currentEmpleadoSubject.asObservable();
+  isLoggedIn$: Observable<boolean> = this.currentEmpleado$.pipe(map(Boolean));
 
   private currentID = new BehaviorSubject<number>(0);  
 

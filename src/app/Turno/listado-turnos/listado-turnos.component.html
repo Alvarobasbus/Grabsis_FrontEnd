@@ -1,64 +1,110 @@
-<div>
-    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-3" >
+<div class="container">
 
-        <form [formGroup]="formulario">
-            <div class="row justify-content-md-center mt-1">
-                <h5>Seleccione una fecha</h5>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="form-outline col-12 mb-3 mt-1">
-                    <input type="date" id="fecha" class="form-control form-control-lg" formControlName="fecha"/>
-                </div>
-                
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="text-center text-lg-start mt-2 ">
-                    <button type="button" class="btn btn-primary btn-lg"
-                      style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="buscar()">Buscar</button>
+    <div class="row">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      Turnos registrados - Busqueda por fecha
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+                        <form [formGroup]="formulario" >
+                            <div class="row">
+                                <div class="col-1"></div>
+                    
+                                <div class="col-sm mt-2">
+                                    <div class="input-group ">
+                                        <span class="input-group-text" id="basic-addon1">Desde</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha1">
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                     
+                                <div class="col-sm mt-2">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Hasta</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha2">
+                  
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 mt-2">
+                                    <div class="form-outline">
+                                        <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+                                     </div>
+                                </div>  
+                            </div>
+                        </form>
                   </div>
-               
             </div>
-        </form>
-        
         </div>
-
+    </div>
 </div>
 
-<div class="container container-fluid">
-    <br>
-    <br>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Vehiculo</th>
-                <th scope="col">Modelo</th>
-                <th scope="col">Usuario</th>
-                <th scope="col">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lst of turnos  " >
-                <td>{{ lst.fecha |  date:'dd-MM-yyyy' }}</td>
-                <td>{{ lst.hora }}</td>
-                <td>{{ lst.vehiculo.patente }}</td>
-                <td>{{ lst.vehiculo.modelo }}</td>
-                <td>{{ lst.usuario.apellido + " " + lst.usuario.nombre  }}</td>
-                <td>{{ lst.isDeleted  | estadoturno: lst.pagado }}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-secondary" (click)="eliminar(lst.idTurno)" *ngIf="lst.isDeleted==false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                            class="bi bi-trash3" viewBox="0 0 16 16">
-                            <path
-                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
-                            </path>
-                        </svg>
-                        <i class="visually-hidden" >Button</i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container container-fluid" >
 
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    Listado de Turnos
+                    </div>
+                    <div class="row mt-2 my-1">
+                        <div class="col-2">
+                            <input type="text" class="form-control" placeholder="Buscar turnos..." name="filterProduct"[(ngModel)]="filterTurno">
+                        </div>
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Vehiculo</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let lst of turnos | filtroTurnos: filterTurno | paginate: { itemsPerPage: 5, currentPage: page } " >
+                                    <td>{{ lst.fecha |  date:'dd-MM-yyyy' }}</td>
+                                    <td>{{ lst.hora }}</td>
+                                    <td>{{ lst.vehiculo.patente }}</td>
+                                    <td>{{ lst.vehiculo.modelo }}</td>
+                                    <td>{{ lst.usuario.apellido + " " + lst.usuario.nombre  }}</td>
+                                    <td>{{ lst.isDeleted  | estadoturno: lst.pagado: lst.ingreso }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary" (click)="eliminar(lst.idTurno)" *ngIf="lst.isDeleted==false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                                class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                                                </path>
+                                            </svg>
+                                            <i class="visually-hidden" >Button</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+

@@ -1,0 +1,123 @@
+<div class="container" *ngIf="modi">
+
+
+  <div class="row justify-content-center">
+    <div class="col" *ngIf="modi">
+        <div class="mt-5">
+            <div class="card col-md-6 offset-md-3">
+                <div class="card-header text-white bg-primary" >
+                  Registro de Insumo
+                </div>
+                <div class="card-body bg-light">
+                    <div class="row justify-content-center">
+                            <div class="row">
+                                <div>
+                                  <form [formGroup]="formulario">
+                                    <div class="mb-3">
+                                      <label for="recipient-name" class="col-form-label">Descripcion:</label>
+                                      <input type="text" class="form-control" id="recipient-name" formControlName="descripcion">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Cantidad:</label>
+                                        <input type="number" class="form-control" id="recipient-name" min="0" formControlName="cantidad">
+                                      </div>
+                                </form>
+                              
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-outline col-12 mb-3 mt-2">
+                                          <button type="button" class="btn btn-secondary mx-2" (click)="cerrar()">Cerrar</button>
+                                          <button type="button" class="btn btn-primary" (click)="guardar()">Guardar Cambios</button>
+                                         </div>
+                                    </div>
+                                 </div>
+                        
+                            </div>  
+                        </div>  
+                      </div> 
+                    </div>      
+              </div>
+            </div>
+        </div>
+  
+</div>
+
+
+<div class="container container-fluid">
+
+  <div class="row" *ngIf="!modi" >
+
+      <div class="col">
+          <div class="mt-5">
+              <div class="card">
+                  <div class="card-header text-white bg-primary" >
+                  Listado de Insumos - {{fecha | fecha}}
+                  </div>
+                  <div class="row mt-2 my-1">
+                      <div class="col-10">
+                          <input type="text" style="width: 150px;" class="form-control" placeholder="Buscar turnos..." name="filterProduct"[(ngModel)]="filter">
+                      </div>
+                      <div class="col">
+                        <button type="button" class="btn btn-outline-primary" (click)="registrar()">
+                          Registar un Insumo
+                      </button>
+                      
+                      </div>
+                  </div>
+                  <div class="card-body bg-light">
+                    <div class="row">
+
+                      <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Stock Actual</th>
+                                <th scope="col">Agregar/Quitar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lst of insumos | filtroInsumos: filter | paginate: { itemsPerPage: 8, currentPage: page } " >
+                                <td *ngIf="lst.cantidad>5">{{ lst.idInsumo}}</td>
+                                <td *ngIf="lst.cantidad<=5" style="color: #E31C1C;">{{ lst.idInsumo}}</td>
+                                <td *ngIf="lst.cantidad>5">{{ lst.descripcion }}</td>
+                                <td *ngIf="lst.cantidad<=5" style="color: #E31C1C;">{{ lst.descripcion }}</td>
+                                <td WIDTH="200" *ngIf="lst.cantidad<=5" style="color: #E31C1C;">{{ lst.cantidad }}</td>
+                                <td WIDTH="200" *ngIf="lst.cantidad>5">{{ lst.cantidad }}</td>
+                                <td WIDTH="120">
+                                        <div class="">
+                                            <form [formGroup]="formulario2">
+                                                <input type="number" class="form-control" min="0" formControlName="numero">
+                                            </form>
+                                         
+                                        </div>
+                                    
+                                </td>
+                
+                                <td>
+                                    <button type="button" class="btn btn-outline-success" (click)="aumentar(lst)" >
+                                        <i class="bi bi-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger mx-3 " (click)="restar(lst)" >
+                                        <i class="bi bi-arrow-down"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                      <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+  

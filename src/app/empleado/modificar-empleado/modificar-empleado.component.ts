@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Empleado } from 'src/app/models/empleado';
 import { Rol } from 'src/app/models/rol';
+import { AuthService } from 'src/app/services/auth.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificar-empleado',
@@ -13,109 +15,138 @@ import { RolService } from 'src/app/services/rol.service';
   styleUrls: ['./modificar-empleado.component.css']
 })
 export class ModificarEmpleadoComponent implements OnInit {
-  empleado: Empleado;
+  
   roles: Rol[];
-  formulario: FormGroup;
   aRol: Rol;
-  idEmpleado: number;
-  deleted: any;
-  
- 
-  private subscripcion =new Subscription();
-  
+  empleados: Empleado[];
+  public page: number;
+  empleado: Empleado;
+  formulario: FormGroup;
+  pass: FormGroup;
+  empleadoLog: Empleado;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private empleadoervice: EmpleadoService,
-    private activatedRoute: ActivatedRoute,
-    private rolservice: RolService){
+  filtro: any = '';
+
+  lista:boolean;
+  modificarEmpleado:boolean;
+
+  private subscripcion =new Subscription();
+
+  constructor(private empleadoService: EmpleadoService,
+    private formBuilder: FormBuilder,
+    private rolService: RolService,
+    private authService: AuthService,
+    private router: Router){
 
   }
+
   ngOnInit(): void {
     this.formulario=this.formBuilder.group({
-      documento: [, Validators.required],
+      documento: [,Validators.required ],
       nombre: [, Validators.required],
       apellido: [, Validators.required],
-      contrasenia: [, Validators.required],
       rol: [, Validators.required]
 
     })
 
-    this.subscripcion.add(
-      this.rolservice.obtenerTodas().subscribe({
-        next: (respuesta) => this.roles=respuesta,
-        error: () => {
-          alert('Error al cargar los Roles');
-        },
-      })
-    );
 
-    const id = this.activatedRoute.snapshot.params['id'];
-    this.idEmpleado=id;
+    this.pass=this.formBuilder.group({
+      contrasenia: [, Validators.required],
+      contrasenia2: [, Validators.required]
 
-    this.subscripcion.add(
-      this.empleadoervice.obtenerPorId(id).subscribe({
-        next: (respuesta)=>{
-          console.log(respuesta)
-          this.empleado=respuesta;
-          this.formulario.patchValue(respuesta)
-          this.formulario.controls['rol'].setValue(this.empleado.rol.id)
-          this.deleted=respuesta.isDeleted
-          
-        },
-        error: ()=> {
-         alert('error al obtener el empleado')
-        }
-      })
-      
-    )
+    },
+    {
+      validators: [this.checkPasswords]
+    })
 
-    this.subscripcion.add(
-      this.formulario.controls['rol'].valueChanges.subscribe({
-        next: (valor) =>{
-          this.rolservice.obtenerPorId(valor).subscribe({
-            next: (respuesta) => this.aRol = respuesta,
-            error: () => console.log('error al intentar guardar el rol seleccionada')
-          })
-        }
-      })
-    )
-
-
-
-
+    this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
+      this.empleado = currentEmpleado;
+    })
   
+
+    this.setEmpleado();
+
+
+
   }
 
+  setEmpleado(){
+    this.formulario.controls['nombre'].setValue(this.empleado.nombre)
+    this.formulario.controls['apellido'].setValue(this.empleado.apellido)
+    this.formulario.controls['documento'].setValue(this.empleado.documento)
+    this.formulario.controls['nombre'].setValue(this.empleado.nombre)
+    this.formulario.controls['rol'].setValue(this.empleado.rol.descripcion)
+    this.pass.controls['contrasenia'].setValue(this.empleado.contrasenia)
+    this.pass.controls['contrasenia2'].setValue(this.empleado.contrasenia)
+  }
+
+ 
+
+  checkPasswords: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const password = control.get("contrasenia");
+    const password_repeat = control.get("contrasenia2");
+    
+    return password &&
+      password_repeat &&
+      password.value !== password_repeat.value
+      ? { passwordCoincide: false }
+      : null;
+  };
+
+ 
+
+ 
 
   guardarEmpleado(){
-    if(this.formulario.invalid){
-      alert('Formulario invalido')
-      return
-    }
 
-    this.empleado.apellido=this.formulario.controls['apellido'].value
-    this.empleado.nombre=this.formulario.controls['nombre'].value
-    this.empleado.documento=this.formulario.controls['documento'].value
-    this.empleado.contrasenia=this.formulario.controls['contrasenia'].value
-    this.empleado.rol=this.aRol
-    this.empleado.isDeleted=this.deleted;
-
-    
+      if(this.formulario.invalid || this.pass.invalid){
+        Swal.fire({
+          title: `Debe completar todos los campos`,
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
+        return
+      }
   
-
-    this.subscripcion.add(
-      this.empleadoervice.modificar(this.empleado).subscribe({
-        next: ()=>{
-          alert('empleado modificado correctamente')
-          this.router.navigate(['listaempleado']);
-        },
-        error: ()=> {
-         alert('error al registrar el empleado')
-        }
-      })
+      this.empleado.nombre= this.formulario.controls['nombre'].value.toUpperCase();
+      this.empleado.apellido= this.formulario.controls['apellido'].value.toUpperCase();
+      this.empleado.documento=this.formulario.controls['documento'].value
+      this.empleado.contrasenia= this.pass.controls['contrasenia'].value
       
-    )
+  
+      this.subscripcion.add(
+        this.empleadoService.guardar(this.empleado).subscribe({
+          next: ()=>{
+            Swal.fire({
+              title: 'Datos modificados Correctamente',
+              icon: 'success',
+              confirmButtonText: "Ok",
+            });
+  
+            this.cancelar();
+          },
+          error: ()=> {
+            Swal.fire({
+              title: 'Error al registrar el empleado',
+              icon: 'error',
+              confirmButtonText: "Ok",
+            });
+            return
+          }
+        })
+        
+      )
+      
+
 
     
   }
+
+  cancelar(){
+    this.router.navigate(['empleado']);
+  }
+
 
 }

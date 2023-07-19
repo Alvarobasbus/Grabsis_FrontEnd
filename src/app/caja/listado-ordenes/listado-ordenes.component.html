@@ -1,0 +1,271 @@
+<div class="container"  *ngIf="modi">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card col-md-6 offset-md-3">
+                    <div class="card-header text-white bg-primary" >
+                      Modificar Orden N° {{orden.idOrden}}
+                    </div>
+                    <div class="card-body bg-light">
+                        <div class="row justify-content-center">
+                            <form>
+    
+
+                                <div class="row">
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Fecha</b></p>
+                                        <p> {{orden.fecha | fecha}} </p>
+                                    </div>
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Usuario</b></p>
+                                        <p> {{orden.turno.usuario.apellido + " " + orden.turno.usuario.nombre }}</p>
+                                    </div>
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Documento</b></p>
+                                         <p> {{orden.turno.usuario.documento}} </p>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Patente</b></p>
+                                        <p> {{orden.turno.vehiculo.patente }}</p>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Modelo</b></p>
+                                         <p> {{orden.turno.vehiculo.modelo}} </p>
+                                    </div>
+                                <div>
+                                    <br>
+                        
+                                </div>
+
+                                <div *ngIf="faltaDetalle">
+
+                                    <div>
+                                        <p class="detalle">Agregar Servicios</p>
+                                        <hr>
+                                    </div>
+                                    <div>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Concepto</th>
+                                                    <th scope="col">Importe</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <tr *ngFor="let lstDet of listaDetalle " >
+                                                    <td class="col-7">{{ lstDet.servicio.descripcion }}</td>
+                                                    <td class="col-3">{{ lstDet.precio | precio }}</td>
+                                                    <td class="col-2">
+                                                        <div >
+                                                            <button type="button" class="btn btn-outline-success" (click)="agregarDetalle(lstDet)">
+                                                                <i class="bi bi-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </table>
+
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                                    <div>
+                                        <p class="detalle">Detalle Facturacion</p>
+                                        <hr>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Concepto</th>
+                                                    <th scope="col">Importe</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <tr *ngFor="let lst of orden.detalle " >
+                                                    <td>{{ lst.servicio.descripcion }}</td>
+                                                    <td>{{ lst.precio | precio }}</td>
+                                                    <td>
+                                                        <div >
+                                                            <button type="button" class="btn btn-outline-secondary" (click)="eliminarDetalle(lst)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                                                    class="bi bi-trash3" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                                                                    </path>
+                                                                </svg>
+                                                                <i class="visually-hidden" >Button</i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                
+                    <div class="row justify-content-end mt-1">
+                        <div class="col-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Total</span>
+                                <input type="text" class="form-control" placeholder="{{orden.total | precio}}"  readonly aria-label="Dollar amount (with dot and two decimal places)">
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-outline col-12 mb-3 mt-2">
+                                            <button type="button" class="btn btn-secondary mx-2" (click)="volver()">Salir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>        
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+
+<div class="container">
+
+    <div class="row" *ngIf="busqueda">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      Ordenes generadas - Busqueda por fecha
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+                        <form [formGroup]="formulario" >
+                            <div class="row">
+                                <div class="col-1"></div>
+                    
+                                <div class="col-sm mt-2">
+                                    <div class="input-group ">
+                                        <span class="input-group-text" id="basic-addon1">Desde</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha1">
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                     
+                                <div class="col-sm mt-2">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Hasta</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha2">
+                  
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 mt-2">
+                                    <div class="form-outline">
+                                        <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+                                     </div>
+                                </div>  
+                            </div>
+                        </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-fluid" *ngIf="resul">
+
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    Listado de Ordenes
+                    </div>
+                    <div class="row mt-2 my-1">
+                        <div class="col-2">
+                            <input type="text" class="form-control" placeholder="Buscar ordenes..." name="filterProduct"[(ngModel)]="filterProduct">
+                        </div>
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha<i class="fa fa-sort"></i></th>
+                                    <th scope="col">Patente<i class="fa fa-sort"></i> </th>
+                                    <th scope="col" >Usuario <i class="fa fa-sort"></i> </th>
+                                    <th scope="col">Metodo de pago</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Empleado <i class="fa fa-sort"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let lst of ordenes | filtroOrdenes: filterProduct | ordenfiltroborrada | paginate: { itemsPerPage: 8, currentPage: page } " >
+                                    <td>{{ lst.fecha | fecha  }}</td>
+                                    <td>{{ lst.turno.vehiculo.patente }}</td>
+                                    <td>{{ lst.turno.usuario.documento }}</td>
+                                    <td>{{ lst.metodoPago.descripcion }}</td>
+                                    <td>{{ lst.total | precio }}</td>
+                                    <td>{{ lst.empleado.apellido + " " + lst.empleado.nombre }}</td>
+                                    <td>
+                                        <div class="btn-group" >
+                                            <button type="button" class="btn btn-outline-secondary"  (click)="modificar(lst)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                    class="bi bi-pencil" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
+                                                    </path>
+                                                </svg>
+                                                <span class="visually-hidden">Button</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                    
+                                    <td>
+                                        <div >
+                                            <button type="button" class="btn btn-outline-secondary" (click)="eliminar(lst)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                                    class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                                                    </path>
+                                                </svg>
+                                                <i class="visually-hidden" >Button</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                    
+                           
+                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

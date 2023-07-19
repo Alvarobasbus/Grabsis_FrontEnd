@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TurnoPipe implements PipeTransform {
 
-  transform(value: any, arg : any): any {
+  transform(value: any, arg : any, arg2: any): any {
 
    
     if(value===true){
@@ -16,8 +16,12 @@ export class TurnoPipe implements PipeTransform {
       return "PAGADO"
     }
 
-    if(arg===false && value===false){
+    if(arg===false && value===false && arg2==false){
       return "PENDIENTE"
+    }
+
+    if(arg===false && value===false && arg2==true){
+      return "INGRESADO"
     }
 
   }
