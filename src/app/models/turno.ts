@@ -1,18 +1,18 @@
+import { Time } from "@angular/common";
 import { Empleado } from "./empleado";
+import { Formulario } from "./formulario";
 import { Usuario } from "./usuario";
 import { Vehiculo } from "./vehiculo";
 
 export class Turno{
     idTurno: number;
     fecha: Date;
-    hora: string;
+    hora: Time;
     pagado: boolean;
     ingreso: boolean;
     empleado: Empleado;
     usuario: Usuario;
     vehiculo: Vehiculo;
-    formulario: string;
-    isDeleted: boolean=false;
-
-
+    formulario: Formulario;
+    isDeleted: boolean;
 }

@@ -1,12 +1,234 @@
-   <div class="bootstrap-wrapper">
-    <div class="container">
-      <div class="row mt20">
-        <div class = "col-md-6 offset-md-3 text-center">
-          <h1>Bienvenido a grabsis</h1>
-          <p>La verificación y el grabado de vehículos son procesos importantes para garantizar la seguridad y la protección de los propietarios de vehículos y de la sociedad en general. La verificación implica la inspección y la revisión de los documentos, las características y las condiciones del vehículo para asegurar que cumple con los requisitos legales y de seguridad. Por otro lado, el grabado de vehículos consiste en marcar el número de identificación del vehículo en las partes principales del mismo para prevenir el robo y facilitar su recuperación en caso de ser robado. Ambos procesos son esenciales para mantener la integridad del parque automotor y garantizar la tranquilidad de los conductores y la sociedad en general.</p>
-          <button class="btn btn-primary" routerLink="turno" routerLinkActive="active">Solicitar turno</button>
-        </div>
+<div class="container">
+    <div class="row mt20">
+      <div class = "col-md-6 offset-md-3 text-center">
+        <h3 style="color:#1f60e2">BIENVENIDO A GRABSIS</h3>
+        <p style="color:#1f60e2">SISTEMA UNICO DE GESTION AUTOMOTOR</p>
       </div>
     </div>
-  </div>
+    <br>
+
+   
+      <div class="row row-cols-2">
+        <div class="col mx-4" style="width: 500px;">
+          <div class="card">
+            <div class="card-header text-white bg-primary" >
+              Bienvenido {{empleadoLog.apellido + " " + empleadoLog.nombre}}
+            </div>
   
+            <div class="card-body bg-light">
+              <div class="row justify-content-center">
+                <div class="row ">
+                  <div class="mb-2">
+                    <p >DATOS PERSONALES</p>
+                    <hr>
+                  </div>
+                <div class="row">
+                    <div class="input-group">
+                        <p class="col-3 me-3"><b>Nombre</b></p>
+                        <p> {{empleadoLog.nombre}} </p>
+                    </div>
+                    <div class="input-group">
+                        <p class="col-3 me-3"><b>Apellido</b></p>
+                        <p> {{empleadoLog.apellido }}</p>
+                    </div>
+                    <div class="input-group">
+                        <p class="col-3 me-3"><b>DNI</b></p>
+                         <p> {{empleadoLog.documento}} </p>
+                    </div>
+  
+                    <div class="input-group">
+                      <p class="col-3 me-3"><b>Rol</b></p>
+                       <p> {{empleadoLog.rol.descripcion}} </p>
+                    </div>
+  
+                  </div>
+                  <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col">
+                      <button type="button" class="btn btn-outline-primary btn-sm" (click)="modificarEmpleado()">Modificar Datos</button>
+                    </div>
+                    <div class="col-3"></div>
+                  </div>
+  
+                </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-1"></div>
+
+        <div class="col" style="width: 500px;">
+          <div class="card">
+            <div class="card-header text-white bg-primary" >
+              LISTADO DE PRECIOS ACTUALES
+            </div>
+  
+            <div class="card-body bg-light">
+              <p>PRECIOS ACTUALIZADOS </p>
+              <hr>
+              <table class="table table-borderless">
+                  <thead>
+                      <tr>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                
+                      </tr>
+                  </thead>
+                  <tbody >
+                      <tr *ngFor="let lst of servicios " >
+                          <td>{{ lst.descripcion }}</td>
+                          <td>{{ lst.precio | precio }}</td>
+                      </tr>
+                  </tbody>
+   
+                
+              </table>
+    
+           
+            </div>
+          </div>
+        </div>
+  
+      </div>
+  
+      <br>
+
+      <div class="row row-cols-2" *ngIf="empleadoLog.rol.descripcion=='Gerente' || empleadoLog.rol.descripcion=='Administrador'" >
+        <div class="col mx-4" style="width: 500px;">
+          <div class="card">
+            <div class="card-header text-white bg-primary" >
+              ESTADO ACTUAL DE CUENTAS
+            </div>
+  
+            <div class="card-body bg-light">
+              <div class="row justify-content-center">
+                <div class="row ">
+                  <p>RESUMEN DE CUENTA MENSUAL AL DIA DE LA FECHA </p>
+                  <hr>
+                  <div class="row">
+                    <div class="col"><p>TOTAL FACTURADO</p> </div>
+                    <div class="col"> {{ this.informe.saldoTotal | precio }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col"><p>SALDO EN CAJA</p> </div>
+                    <div class="col"> {{ this.informe.saldoCaja | precio }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col"><p>DEPOSITOS</p> </div>
+                    <div class="col"> {{ this.informe.deposito | precio}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col"><p>GASTOS</p> </div>
+                    <div class="col"> {{ this.informe.egreso | precio}}</div>
+                  </div>
+
+        
+  
+                </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-1"></div>
+
+
+        <div class="col" style="width: 500px;">
+          <div class="card">
+            <div class="card-header text-white bg-primary" >
+              INSUMOS
+            </div>
+  
+            <div class="card-body bg-light">
+              <p>LISTADO DE INSUMOS A REPONER </p>
+              <hr>
+              <table class="table table-borderless">
+                  <thead>
+                      <tr>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                
+                      </tr>
+                  </thead>
+                  <tbody >
+                      <tr *ngFor="let lst of insumos " >
+                          <td>{{ lst.descripcion }}</td>
+                          <td>{{ lst.cantidad  }}</td>
+                      </tr>
+                  </tbody>
+   
+                
+              </table>
+    
+           
+            </div>
+          </div>
+        </div>
+
+      
+  
+      </div>
+
+      <br>
+
+      <div class="row row-cols-2">
+        <div class="col mx-4" style="width: 500px; height: 700px;">
+          <div class="card">
+            <div class="card-header text-white bg-primary" >
+              INFORME DE TURNOS EN EL DIA DE HOY
+            </div>
+  
+            <div class="card-body bg-light">
+              <div class="row justify-content-center">
+                <div class="row ">
+
+                  <div class="row">
+                    <p>CANTIDAD DE TURNOS REGISTRADOS: {{this.informeTurno.registrados}} </p>
+                    <hr>
+      
+                    
+                  </div>
+                 
+                  <div class="col-lg-12 " >
+                                
+                    <canvas id="ctx"></canvas>
+                  </div>
+
+        
+  
+                </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-1">
+      </div>
+
+      <div class="col" style="width: 500px;">
+        <div class="card">
+          <div class="card-header text-white bg-primary" >
+            CANTIDAD DE SERVICIOS REALIZADOS HOY
+          </div>
+  
+          <div class="card-body bg-light">
+            
+
+            <div class="col-lg-10">
+                              
+              <canvas id="doughnut"></canvas>
+            </div>
+  
+         
+          </div>
+        </div>
+      </div>
+  
+      </div>
+
+    
+
+</div>
+
+

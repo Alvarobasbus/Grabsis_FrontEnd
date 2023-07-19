@@ -1,0 +1,252 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      INFORME DE CAJA 
+                    </div>
+                    <div class="card-body bg-light"> 
+                        <div class="row">
+
+                            <form [formGroup]="formulario" >
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="input-group ">
+                                                <span class="input-group-text" id="basic-addon1">Mes</span>
+                                                <div class="col">
+                                                    <select class="form-select" id="inputGroupSelect01" formControlName="mes">
+                                                        <option value="0" selected>ENERO</option>
+                                                        <option value="1" >FEBRERO</option>
+                                                        <option value="2" >MARZO</option>
+                                                        <option value="3" >ABRIL</option>
+                                                        <option value="4" >MAYO</option>
+                                                        <option value="5" >JUNIO</option>
+                                                        <option value="6" >JULIO</option>
+                                                        <option value="7" >AGOSTO</option>
+                                                        <option value="8" >SEPTIEMBRE</option>
+                                                        <option value="9" >OCTUBRE</option>
+                                                        <option value="10" >NOVIEMBRE</option>
+                                                        <option value="11" >DICIEMBRE</option>
+                                                    </select>
+                                                </div>
+                                    
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="col">
+                                                <div class="form-outline">
+                                                    <button type="button" class="btn btn-outline-primary" (click)="porMes()">REPORTE MENSUAL</button>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="col">
+                                                <div class="form-outline">
+                                                    <button type="button" class="btn btn-outline-primary" (click)="anual()">REPORTE ANUAL</button>
+                                                </div>        
+                                            </div> 
+                                        </div>
+
+
+                                    </div>
+                                    
+
+                                    <div>
+                                        <br>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="input-group ">
+                                                <span class="input-group-text" id="basic-addon1">Desde</span>
+                                                <div class="col">
+                                                    <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha1">
+                                                </div>
+                                    
+                                            </div>
+                                        </div>
+                             
+                                        <div class="col-sm-4">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">Hasta</span>
+                                                <div class="col">
+                                                    <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha2">
+                          
+                                                </div>
+                                            </div>
+        
+                                        </div>
+
+
+                                        <div class="col-3">
+                                            <div class="form-outline">
+                                                <button type="button" class="btn btn-outline-primary" (click)="buscar()">BUSCAR</button>
+                                            </div>
+                                        </div>  
+
+                                    </div>
+                        
+                                </div>
+                            </form>
+
+
+
+                        </div>
+
+                    </div>
+     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container container-fluid" >
+
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    RESULTADOS
+                    </div>
+                    <div class="card-body bg-light">
+                        <form [formGroup]="formReporte" >
+                            <div class="row">
+                            
+
+                                    <div class="col-sm-3">
+                                        <div class="col">
+                                            <div class="input-group ">
+                                                <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">TOTAL</span>
+                                                <div class="col" >
+                                                    <input type="text" style="width: 150px;" class="form-control letra" readonly placeholder="Email@email.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="saldoTotal">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="col-sm-3">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">EFECTIVO</span>
+                                                <div class="col"  >
+                                                    <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="efectivo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">CREDITO</span>
+                                                <div class="col"  >
+                                                    <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="credito">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-sm-3">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">DEBITO</span>
+                                                <div class="col"  >
+                                                    <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="debito">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+
+                            <div><br></div>
+
+                            <div class="row">
+
+                                <div class="col-sm-3">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">GASTOS</span>
+                                            <div class="col"  >
+                                                <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="egreso">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-3">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">DEPOSITOS</span>
+                                            <div class="col"  >
+                                                <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="deposito">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text letra" id="basic-addon1" style="width: 120px;">MERCADOPAGO</span>
+                                            <div class="col"  >
+                                                <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="mercadoPago">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                
+                                <div class="col-sm-3">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text letra" id="basic-addon1" style="width: 125px;">TRANSFERENCIA</span>
+                                            <div class="col"  >
+                                                <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="transferencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+
+
+                            </div>
+
+
+                            <div><br></div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text letra" id="basic-addon1" style="width: 105px;">EN CAJA</span>
+                                            <div class="col"  >
+                                                <input type="text" style="width: 150px;" class="form-control letra" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="saldoCaja">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+            
+            </div>
+        </div>
+    </div>
+</div>

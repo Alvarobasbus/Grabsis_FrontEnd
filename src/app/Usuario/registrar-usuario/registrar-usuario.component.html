@@ -1,55 +1,150 @@
 <form [formGroup]="formulario" >
     <div class="container">
-<h3>Alta de usuario</h3>
+        <div class="container">
+            <br>
+            <br>
+            <h3 style="color:#1f60e2">Usuario</h3>
+            <p> <strong>Datos</strong></p>
 
+            <div class="progress" style="height: 1px;">
+                <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="progress" style="height: 5px;">
+                <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+    
+        </div>
 
     </div>
 
 <br>
 <br>
-    <div class="container">
-        <div class="mb-3">
-            <label for="inputDocumento" class="form-label">Documento:</label>
-            <input type="text" class="form-control" id="inputDocumento" formControlName="documento">
-        </div>
-    
-        <div class="mb-3">
-            <label for="inputNombre" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
-        </div>
-        <div class="mb-3">
-            <label for="inputApellido" class="form-label">Apellido:</label>
-            <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
-        </div>
-        <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="inputEmail" formControlName="email">
-        </div>
-        <div class="mb-3">
-            <label for="inputTelefono" class="form-label">Telefono:</label>
-            <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
-        </div>
+<div class="container">
 
-        <div class="mb-3">
-            <label for="provincia" class="form-label">Provincia:</label>
-            <select class="form-select" id="provincia" formControlName="provincia">
-                <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
-                    {{ lst.nombre }}
-                </option>
-            </select>
-        </div>
-    
-        <div class="mb-3">
-            <label for="inputDomicilio" class="form-label">Domicilio:</label>
-            <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
-        </div>
+    <div class="row">
+        <form [formGroup]="formDni">
+            <div class="row">
+                <div class="col-sm-5">
+                <div class="col">
+                    <div class="input-group ">
+                        <span class="input-group-text" id="basic-addon1" style="width: 105px;">Documento</span>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Numero de Documento" aria-label="Username" aria-describedby="basic-addon1" formControlName="documento">
+                        </div>
+                    </div>
+                  </div>
+
+            </div>
+            </div>
         
-    
-    
-        <button type="submit" class="btn btn-primary" (click)="guardarUsuario()">Guardar</button>
-        <button type="submit" class="btn btn-secondary">limpiar</button>
-
-
+        </form>
     </div>
+
+
+   <form [formGroup]="formulario">
+          <div class="row">
+
+        <div class="col-sm-5 mt-2">
+            <div class="col ">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Nombre</span>
+                    <div class="col" >
+                        <input type="text" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" formControlName="nombre">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-5 mt-2">
+            <div class="col ">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Apellido</span>
+                    <div class="col" >
+                        <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" formControlName="apellido">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-5 mt-2">
+
+            <div class="col">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Email</span>
+                    <div class="col" >
+                        <input type="email" class="form-control" placeholder="Email@email.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="email">
+                    </div>
+                </div>
+            </div>
+         
+
+        </div>
+
+        <div class="col-sm-5 mt-2">
+
+            <div class="col">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Telefono</span>
+                    <div class="col" >
+                        <input type="number" class="form-control" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="telefono">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-sm-5 mt-2">
+
+            <div class="col">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Provincia</span>
+                    <div class="col" >
+                        <select class="form-select" id="provincia" formControlName="provincia">
+                            <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
+                                {{ lst.nombre }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+         
+
+        </div>
+
+        <div class="col-sm-5 mt-2">
+
+            <div class="col">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1" style="width: 105px;">Domicilio</span>
+                    <div class="col" >
+                        <input type="text" class="form-control" placeholder="Domicilio" aria-label="Username" aria-describedby="basic-addon1" formControlName="domicilio">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size: 14px; color: red;" *ngIf="formDni.invalid && formDni.dirty">El numero de documento debe tener 8 caracteres y sin puntos</p>
+       
+    <div>
+
+        <br>
+    </div>
+
+    <button *ngIf="!usuarioRegistrado" type="submit" class="btn btn-primary" style="width: 105px;" [disabled]="formulario.invalid && formulario.pristine" (click)="guardarUsuario()">GUARDAR</button>
+    <button *ngIf="usuarioRegistrado" type="submit" class="btn btn-primary" style="width: 105px;" [disabled]="formDni.invalid && formDni.dirty" (click)="guardarUsuario()">MODIFICAR</button>
+    <button type="submit" class="btn btn-danger mx-2" style="width: 105px;" (click)="salirUsuario()">SALIR</button>
+    </form>
+
+
+
+</div>
 
 </form>

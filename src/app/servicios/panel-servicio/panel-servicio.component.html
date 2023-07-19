@@ -1,0 +1,98 @@
+<div class="container">
+
+   
+        <div class="row">
+
+            <div class="col">
+                <div class="mt-5">
+                    <div class="card">
+                        <div class="card-header text-white bg-primary" >
+                          AGREGAR SERVICIOS
+                        </div>
+                        <div class="card-body bg-light">
+                          <div class="row justify-content-md-center">
+                            <form [formGroup]="formulario">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="form-outline col-12 mb-3 mt-1">
+                                       
+                                            <input type="text" id="fecha" class="form-control form-control-lg" placeholder="Descripcion del servicio" formControlName="descripcion"/>
+                                        </div>
+                                    </div>   
+                                    <div class="col-auto">
+                                        <div class="form-outline col-12 mb-3 mt-1">
+                                           
+                                            <input type="number" id="fecha" class="form-control form-control-lg" placeholder="Precio" min="1" formControlName="precio"/>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-outline col-12 mb-3 mt-2">
+                                            <button type="button" class="btn btn-primary" (click)="agregarServicio()">Agregar</button>
+                                            <button type="button" class="btn btn-secondary mx-2" (click)="cancelar()">Cancelar</button>
+    
+                                         </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </form>
+                      </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="mt-5">
+                    <div class="card">
+                        <div class="card-header text-white bg-primary" >
+                          MODIFICAR SERVICIOS
+                        </div>
+                        <div class="card-body bg-light">
+                          <div class="row justify-content-md-center">
+                            <form [formGroup]="formActualizar">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="form-outline col-12 mb-3 mt-1">
+                                           
+                                                <label for="labelservicio" class="form-label">Servicios</label>
+                                                <select class="form-select" id="servicio" formControlName="servicio">
+                                                    <option value="0" disabled>SELECCIONE UN SERVICIO</option>
+                                                    <option *ngFor="let lst of servicios" [value]="lst.idServicio" onchange="id(lst.idServicio)">
+                                                        {{ lst.descripcion }}
+                                                    </option>
+                                                </select>
+                                            
+                                        </div>
+                                    </div>
+                                          <div class="col-auto">
+                                        <div class="form-outline col-12 mb-3 mt-4">
+                                           
+                                            <input type="number" id="precio" class="form-control form-control-lg" placeholder="Precio" min="1" formControlName="precio"/>
+                                        </div>
+                                    </div>
+                            
+            
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-outline col-12 mb-3 mt-2">
+                                            <button type="button" class="btn btn-primary" (click)="actualizarPrecio()">Actualizar Precio</button>
+                                         </div>
+                
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                      </div>
+                </div>
+            </div>
+     
+    
+        </div>
+
+</div>
+

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Marca } from 'src/app/models/marca';
 import { MarcaService } from 'src/app/services/marca.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-marca',
@@ -16,6 +17,8 @@ export class RegistrarMarcaComponent implements OnInit{
   marca: Marca;
   text:string;
   private subscripcion =new Subscription();
+
+  
   
   
   constructor(private marcaService: MarcaService, private router: Router,
@@ -31,7 +34,7 @@ export class RegistrarMarcaComponent implements OnInit{
     
   }
   limpiar(){
-    this.formulario.controls['descripcion'].value("");
+    this.formulario.controls['descripcion'].setValue("");
 
   }
 
@@ -50,7 +53,11 @@ export class RegistrarMarcaComponent implements OnInit{
     this.subscripcion.add(
       this.marcaService.guardar(this.marca).subscribe({
         next: ()=>{
-          alert('Marca registrada correctamente')
+          Swal.fire({
+            title: 'Marca Registrada Correctamente',
+            icon: 'success',
+            confirmButtonText: "Ok",
+          });
           this.limpiar()
         },
         error: ()=> {

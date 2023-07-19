@@ -1,0 +1,219 @@
+<div class="container"  *ngIf="modi">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card col-md-6 offset-md-3">
+                    <div class="card-header text-white bg-primary" >
+                      Registro de Formulario 12 
+                    </div>
+                    <div class="card-body bg-light">
+                        <div class="row justify-content-center">
+                                <div class="row">
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Fecha</b></p>
+                                        <p> {{turno.fecha | fecha}} </p>
+                                    </div>
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Usuario</b></p>
+                                        <p> {{turno.usuario.apellido + " " + turno.usuario.nombre }}</p>
+                                    </div>
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Documento</b></p>
+                                         <p> {{turno.usuario.documento}} </p>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Patente</b></p>
+                                        <p> {{turno.vehiculo.patente }}</p>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <p class="col-2"><b>Modelo</b></p>
+                                         <p> {{turno.vehiculo.modelo}} </p>
+                                    </div>
+
+                                    <div>
+                                        <hr>
+                                    </div>
+                                    <div>
+                                        <form  [formGroup]="formulario2">
+                                            <div class="input-group mb-3">
+                                                <span class="input-text col-3"><b>Formulario</b></span>
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="form1">
+                                                </div>
+                                             </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-text col-3" id="basic-addon3"><b>Repetir N°</b></span>
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="form2">
+                                      
+                                                </div>
+                                             </div>
+
+
+                                             <mat-error *ngIf="formulario2.errors">El numero de formulario no coincide</mat-error>
+
+
+
+                                        </form>
+                                    
+                                    </div>
+                                    <div>
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-outline col-12 mb-3 mt-2">
+                                                <button type="button" class="btn btn-primary" [disabled]="formulario2.errors" (click)="modificarFormulario()">Agregar</button>
+                                                <button type="button" class="btn btn-secondary mx-2" (click)="volver()">Cancelar</button>
+        
+                                             </div>
+                                        </div>
+                                        
+                                    </div>
+                            
+                                </div>  
+                            </div>
+                                     
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+
+<div class="container">
+
+    <div class="row" *ngIf="busqueda">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      Ordenes generadas - Busqueda por fecha
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+                        <form [formGroup]="formulario" >
+                            <div class="row">
+
+                                <div class="col-4 mt-2">
+                                    <div class="input-group ">
+                                        <label class="input-group-text" for="inputGroupSelect01">Busqueda</label>
+                                        <div class="col">
+                                            <select class="form-select" id="inputGroupSelect01" formControlName="select">
+                                                <option value="fecha" selected>Por Fecha</option>
+                                                <option value="patente">Patente</option>
+                                                <option value="formulario">Formulario</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                   
+                    
+                                <div class="col-sm mt-2" *ngIf="formulario.controls['select'].value=='fecha'">
+                                    <div class="input-group ">
+                                        <span class="input-group-text" id="basic-addon1">Desde</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha1">
+                                        </div>
+                                    </div>
+                                </div>
+                     
+                                <div class="col-sm mt-2" *ngIf="formulario.controls['select'].value=='fecha'">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Hasta</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha2">
+                  
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm mt-2" *ngIf="formulario.controls['select'].value=='patente'" >
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Patente</span>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" formControlName="patente">
+                  
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm mt-2" *ngIf="formulario.controls['select'].value=='formulario'">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Formulario</span>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" formControlName="formulario">
+                  
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 mt-2">
+                                    <div class="form-outline">
+                                        <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+                                     </div>
+                                </div>  
+                            </div>
+                        </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-fluid" *ngIf="resul">
+
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    Listado de Egresos
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Patente</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">N° de Formulario</th>
+                                    <th scope="col">Empleado</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let lst of turnos | filtroListadoFormularios | paginate: { itemsPerPage: 8, currentPage: page } " >
+                                    <td>{{ lst.fecha | fecha  }}</td>
+                                    <td>{{ lst.vehiculo.patente }}</td>
+                                    <td>{{ lst.vehiculo.modelo }}</td>
+                                    <td style="color:#1f60e2"><strong>{{ lst.formulario.numeroFormulario }}</strong></td>
+                                    <td>{{ lst.formulario.empleado.apellido + " " + lst.formulario.empleado.nombre }}</td>
+                                     <td>
+                                        <div class="btn-group" >
+                                            <button type="button" class="btn btn-outline-secondary"  (click)="modificar(lst)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                    class="bi bi-pencil" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
+                                                    </path>
+                                                </svg>
+                                                <span class="visually-hidden">Button</span>
+                                            </button>
+                                        </div>
+                                    </td>
+    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

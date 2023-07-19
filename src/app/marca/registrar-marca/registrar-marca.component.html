@@ -1,29 +1,38 @@
-<div>
-    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-3" >
-        <br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card col-md-6 offset-md-3">
+                    <div class="card-header text-white bg-primary" >
+                      AGREGAR MARCA
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row justify-content-center">
+                        <form [formGroup]="formulario">
+    
+                            <div class="row">
+                                <div class="input-group mb-2 mt-2">
 
-        <form [formGroup]="formulario">
-            <div class="row justify-content-md-center mt-1">
-                <h5>Ingrese la Marca </h5>
-                <br>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="form-outline col-12 mb-3 mt-1">
-                    <input type="text" id="fecha" class="form-control form-control-lg" formControlName="descripcion"/>
-                </div>
-                
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="text-center text-lg-start mt-2 ">
-                    <button type="button" class="btn btn-primary btn-lg"
-                      style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="agregarMarca()">Agregar</button>
-                      <button type="button" class="btn btn-secondary btn-lg mx-2"
-                      style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="limpiar()">Cancelar</button>
+                                    <span class="input-group-text col-3">Descripcion</span>
+                                    <input type="text" class="form-control" placeholder="Ingrese la marca del vehiculo..." aria-label="Cantidad (al dólar más cercano)" formControlName="descripcion">
+                                  </div>
+                            </div>
+ 
+
+                            <div class="row mt-2">
+                                <div class="col-sm">
+                                    <div class="form-outline col-12 mb-3 mt-2">
+                                        <button type="button" class="btn btn-primary" (click)="agregarMarca()">Agregar</button>
+                                        <button type="button" class="btn btn-secondary mx-2" (click)="limpiar()">Cancelar</button>
+
+                                     </div>
+                                </div>
+                                
+                            </div>
+
+                        </form>
                   </div>
-               
             </div>
-        </form>
-        
         </div>
-
+    </div>
 </div>

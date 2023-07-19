@@ -1,119 +1,356 @@
+<div *ngIf="registroExito">
+    <div id="invoice" >
+        <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                    <div class="card mt-5">
+                                <div class="card-header text-center">
+                                    <h1 class="display-4" style="color:#1f60e2">GRABSIS</h1>
+                                </div>
+                            <div class="card-body">
+                                <br>
+                                <h2 class="card-title text-center mb-4">Certificado de Turno</h2>
+                                <br>
+
+                                <div class="row">
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Fecha</b></h5>
+                                        <h5> {{turno.fecha | fecha}} </h5>
+                                    </div>
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Hora</b></h5>
+                                        <h5> {{turno.hora}} </h5>
+                                    </div>
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Usuario</b></h5>
+                                        <h5> {{turno.usuario.apellido + " " + turno.usuario.nombre }}</h5>
+                                    </div>
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Documento</b></h5>
+                                        <h5> {{turno.usuario.documento}} </h5>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Patente</b></h5>
+                                        <h5> {{turno.vehiculo.patente }}</h5>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Modelo</b></h5>
+                                        <h5> {{turno.vehiculo.modelo}} </h5>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Lugar</b></h5>
+                                        <h5> PLANTA DE VERIFICACION POLICIAL </h5>
+                                    </div>
+                                    <div class="input-group">
+                                        <h5 class="col-3"><b>Ubicacion</b></h5>
+                                        <h5> Ruta 51 s/n - La banda - Santiago del Estero </h5>
+                                    </div>
+                                </div>
+                                <br>
+                                <p class="card-text text-center"> Lo esperamos!</p>
+                                <br>
+                                <p class="card-text"> <strong> En caso de no poder asistir informar al mail contacto@grabsis.com.ar </strong></p>
+                            </div>
+                        </div>  
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <button  type="button" class="btn btn-primary text-capitalize mx-2" style="width: 105px;" (click)="pdf()">Imprimir</button>
+        <button type="button" class="btn btn-danger text-capitalize mx-2" style="width: 105px;" (click)="salirTurno()">Salir</button>
+
+    </div>
+</div>
+
+
+
 <div >  
-    <form [formGroup]="formulario" *ngIf="user">
+    <div  *ngIf="user">
         <div class="container">
-    <h1>Solicitud de Turno</h1>
-    <p>Datos del usuario</p>
+            <br>
+            <br>
+            <h3 style="color:#1f60e2">Solicitud de Turno</h3>
+            <p> <strong>Datos del Usuario</strong></p>
+
+            <div class="progress" style="height: 1px;">
+                <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="progress" style="height: 5px;">
+                <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
     
         </div>
     
     <br>
-    <br>
         <div class="container">
-            <div class="mb-3">
-                <label for="inputDocumento" class="form-label">Documento:</label>
-                <input type="text" class="form-control" id="inputDocumento" formControlName="documento">
+
+            <div class="row">
+                <form [formGroup]="formDni">
+                    <div class="row">
+                                  <div class="col-sm-5">
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">Documento</span>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Numero de Documento" aria-label="Username" aria-describedby="basic-addon1" formControlName="documento">
+                                </div>
+                            </div>
+                     
+                        </div>
+    
+    
+                    </div>
+                    </div>
+          
+                </form>
             </div>
-        
-            <div class="mb-3">
-                <label for="inputNombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="inputNombre" formControlName="nombre">
+
+
+           <form [formGroup]="formulario">
+                  <div class="row">
+
+                <div class="col-sm-5 mt-2">
+                    <div class="col ">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Nombre</span>
+                            <div class="col" >
+                                <input type="text" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" formControlName="nombre">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-5 mt-2">
+                    <div class="col ">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Apellido</span>
+                            <div class="col" >
+                                <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" formControlName="apellido">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="inputApellido" class="form-label">Apellido:</label>
-                <input type="text" class="form-control" id="inputApellido" formControlName="apellido">
+
+            <div class="row">
+
+                <div class="col-sm-5 mt-2">
+
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Email</span>
+                            <div class="col" >
+                                <input type="email" class="form-control" placeholder="Email@email.com" aria-label="Username" aria-describedby="basic-addon1" formControlName="email">
+                            </div>
+                        </div>
+                    </div>
+                 
+
+                </div>
+
+                <div class="col-sm-5 mt-2">
+
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Telefono</span>
+                            <div class="col" >
+                                <input type="number" class="form-control" placeholder="telefono" aria-label="Username" aria-describedby="basic-addon1" formControlName="telefono">
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+
+
+
             </div>
-            <div class="mb-3">
-                <label for="inputEmail" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="inputEmail" formControlName="email">
+
+
+            <div class="row">
+
+                <div class="col-sm-5 mt-2">
+
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Provincia</span>
+                            <div class="col" >
+                                <select class="form-select" id="provincia" formControlName="provincia">
+                                    <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
+                                        {{ lst.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                 
+
+                </div>
+
+                <div class="col-sm-5 mt-2">
+
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Domicilio</span>
+                            <div class="col" >
+                                <input type="text" class="form-control" placeholder="Domicilio" aria-label="Username" aria-describedby="basic-addon1" formControlName="domicilio">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="inputTelefono" class="form-label">Telefono:</label>
-                <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono">
+            <div>
+                <p style="font-size: 14px; color: red;" *ngIf="formDni.invalid && formDni.dirty">El numero de documento debe tener 8 caracteres y sin puntos</p>
+            </div>
+                
+            <div>
+                <br>
             </div>
     
-            <div class="mb-3">
-                <label for="provincia" class="form-label">Provincia:</label>
-                <select class="form-select" id="provincia" formControlName="provincia">
-                    <option *ngFor="let lst of provincias" [value]="lst.idProvincia">
-                        {{ lst.nombre }}
-                    </option>
-                </select>
-            </div>
-        
-            <div class="mb-3">
-                <label for="inputDomicilio" class="form-label">Domicilio:</label>
-                <input type="text" class="form-control" id="inputDomicilio" formControlName="domicilio">
-            </div>
-            
-        
-        
-            <button type="submit" class="btn btn-primary" (click)="guardarUsuario()">Guardar</button>
-            <button type="submit" class="btn btn-secondary">limpiar</button>
+            <button type="submit" class="btn btn-secondary mx-2"  style="width: 105px;" disabled>ATRAS</button>
+            <button type="submit" class="btn btn-primary" style="width: 105px;" [disabled]="formDni.invalid || formulario.invalid && formulario.pristine" (click)="guardarUsuario()">Siguiente</button>
+            <button type="button" class="btn btn-danger text-capitalize mx-2" style="width: 105px;" (click)="salirTurno()">Salir</button>
+
+            </form>
+      
     
     
         </div>
     
-    </form>
+    </div>
     
     <div *ngIf="mostrarVehiculo" class="container">
-        <div>
-            <h1>Solicitud de Turno</h1>
-            <p>Datos del Vehiculo</p>
-        </div>
+        <div class="container">
+            <br>
+            <br>
+            <h3 style="color:#1f60e2">Solicitud de Turno</h3>
+            <p> <strong>Datos del Vehiculo</strong></p>
+            <div class="row">
+                <div class="progress" style="height: 1px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+       
     
+        </div>
         <br>
-        <br>
+        <div class="row">
+            <form [formGroup]="formPatente">
+                <div class="row">
+                     <div class="col-sm-5 mt-2">
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Patente</span>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Pantente del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="patente">
+                            </div>
+                        </div>
+                        <p style="font-size: 14px; color: red;" *ngIf="formPatente.invalid && formPatente.dirty">La patente debe contener entre 5 y 7 caracteres</p>
+
+                     </div>
+                </div>
+                </div>
+               
+            </form>
+        </div>
+
     
         <div>
             <form [formGroup]="formVehiculo" >
-                 
-                <div class="mb-3">
-                    <label for="inputPatente" class="form-label">Patente:</label>
-                    <input type="text" class="form-control" id="inputPatente" formControlName="patente">
+                <div class="row">
+                    <div class="col-sm-5 mt-2">
+    
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">Tipo</span>
+                                <div class="col" >
+                                    <select class="form-select" id="tipo" formControlName="tipo">
+                                        <option value="AUTOMOVIL">AUTOMOVIL</option>
+                                        <option value="MOTOVEHICULO">MOTOVEHICULO</option>
+                                        <option value="CAMION">CAMION</option>
+                                        <option value="ACOPLADO">ACOPLADO</option>
+                                        <option value="MAQUINARIA AGRICOLA">MAQUINARIA AGRICOLA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+
+                    <div class="col-sm-5 mt-2">
+    
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">Marca</span>
+                                <div class="col" >
+                                    <select class="form-select" id="marca" formControlName="marca">
+                                        <option *ngFor="let lst of marcas" [value]="lst.idMarca">
+                                            {{ lst.descripcion }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-    
-                <div class="mb-3">
-                    <label for="tipo" class="form-label">Tipo:</label>
-                    <select class="form-select" id="tipo" formControlName="tipo">
-                        <option value="AUTOMOVIL">AUTOMOVIL</option>
-                        <option value="MOTOVEHICULO">MOTOVEHICULO</option>
-                        <option value="CAMION">CAMION</option>
-                        <option value="ACOPLADO">ACOPLADO</option>
-                        <option value="MAQUINARIA AGRICOLA">MAQUINARIA AGRICOLA</option>
-                    </select>
+
+                <div class="row">
+                    <div class="col-sm-5 mt-2">
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">Modelo</span>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Modelo del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="modelo">
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+
+
+                    <div class="col-sm-5 mt-2">
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">N° Chasis</span>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Numero de chasis del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="chasis">
+                                </div>
+                            </div>
+                         </div>
+                    </div>
                 </div>
-    
-                <div class="mb-3">
-                    <label for="marca" class="form-label">Marca:</label>
-                    <select class="form-select" id="marca" formControlName="marca">
-                        <option *ngFor="let lst of marcas" [value]="lst.idMarca">
-                            {{ lst.descripcion }}
-                        </option>
-                    </select>
+
+                <div class="row">
+                    
                 </div>
-    
-                <div class="mb-3">
-                    <label for="inputModelo" class="form-label">Modelo:</label>
-                    <input type="text" class="form-control" id="inputModelo" formControlName="modelo">
+
+                <div class="row">
+                    <div class="col-sm-5 mt-2">
+                        <div class="col">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="basic-addon1" style="width: 105px;">N° Motor</span>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Numero del motor del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="motor">
+                                </div>
+                            </div>
+                         </div>
+                    </div>
                 </div>
-    
-                <div class="mb-3">
-                    <label for="inputChasis" class="form-label">Numero de chasis:</label>
-                    <input type="text" class="form-control" id="inputChasis" formControlName="chasis">
+                <div>
+                    <br>
                 </div>
-    
-                <div class="mb-3">
-                    <label for="inputMotor" class="form-label">Numero de motor:</label>
-                    <input type="text" class="form-control" id="inputMotor" formControlName="motor">
-                </div>
-    
-               
-    
-    
-    
-                <button type="submit" class="btn btn-primary" (click)="guardarvehiculo()">Guardar</button>
-                <button type="submit" class="btn btn-secondary">limpiar</button>
-    
+                <button type="submit" class="btn btn-secondary" style="width: 105px;" (click)="atrasVehiculo()">ATRAS</button>
+                <button type="submit" class="btn btn-primary mx-2"  style="width: 105px;" (click)="guardarvehiculo()">SIGUIENTE</button>
+                <button type="button" class="btn btn-danger text-capitalize mx-2" style="width: 105px;" (click)="salirTurno()">Salir</button>
+
     
             </form>
     
@@ -124,44 +361,81 @@
     
     
     <div *ngIf="mostrarRegistroTurno" class="container">
-        <h1>Solicitud de Turno</h1>
-        <p>Seleccione Fecha y Hora</p>
+        <div class="container">
+            <br>
+            <br>
+            <h3 style="color:#1f60e2">Solicitud de Turno</h3>
+            <p> <strong>Dia y Horario</strong></p>
+            <div class="row">
+                <div class="progress" style="height: 1px;">
+                    <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+       
+        </div>
         <br>
         <form [formGroup]="formTurno" >
-    
-    
-    
-        <div class="mb-3">
-            <div class="mb-3">
-                <label for="inputFecha" class="form-label">Seleccione fecha:</label>
-                <input type="date" class="form-control" id="inputFecha" formControlName="fecha">
+
+            <div class="row">
+                <div class="col-sm-5 mt-2">
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Fecha</span>
+                            <div class="col">
+                                <input type="date" id="date" for="date" class="form-control" placeholder="Numero del motor del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Seleccion una fecha</mat-label>
+                                <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" formControlName="fecha">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-5 mt-2">
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Horario</span>
+                            <div class="col">
+                                
+                            <select class="form-select" size="auto" id="hora" formControlName="hora">
+                                <option value="1" disabled selected>Seleccione un horario</option>
+                                <option value="8:00">08:00</option>
+                                <option value="8:30">08:30</option>
+                                <option value="9:00">09:00</option>
+                                <option value="9:30">09:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                            </select>
+                                                          
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div>
+                <br>
             </div>
     
-              
-              
-        </div>
-    
-        <div class="mb-3" > 
-    
-            <select class="form-select" size="auto" id="hora" formControlName="hora">
-                <option value="1" disabled selected>Seleccione un horario</option>
-                <option value="8:00">8:00</option>
-                <option value="8:30">8:30</option>
-                <option value="9:00">9:00</option>
-                <option value="9:30">9:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-            </select>
-    
-        </div>
-    
-        <button type="submit" class="btn btn-primary" (click)="confirmarTurno()">Confirmar turno</button>
-        <button type="submit" class="btn btn-secondary">Cancelar</button>
-    
+
+        <button type="submit" class="btn btn-secondary" style="width: 105px;" (click)="atrasHorario()">ATRAS</button>
+        <button type="submit" class="btn btn-primary mx-2" (click)="confirmarTurno()">Confirmar turno</button>
+        <button type="button" class="btn btn-danger text-capitalize mx-2" style="width: 105px;" (click)="salirTurno()">Salir</button>
+
     
         </form>
     

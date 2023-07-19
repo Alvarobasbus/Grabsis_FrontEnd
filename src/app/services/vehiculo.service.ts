@@ -8,11 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class VehiculoService {
 
-  private URL: string = 'http://localhost:8080/Vehiculo';
+  private URL: string = 'http://localhost:8080/vehiculo';
   constructor(private http: HttpClient) { }
 
 
   guardar(vehiculo: Vehiculo): Observable<Vehiculo>{
     return this.http.post<Vehiculo>(`${this.URL}/crear`, vehiculo)
+  }
+  obtenerPorPatente(patente: string): Observable<Vehiculo>{
+    return this.http.get<Vehiculo>(`${this.URL}/${patente}`);
   }
 }

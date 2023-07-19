@@ -1,0 +1,122 @@
+<div class="container">
+
+    <div class="row" *ngIf="busqueda">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      USUARIO - BUSQUEDA POR DOCUMENTO NACIONAL DE IDENTIDAD
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+                        <form [formGroup]="formulario" >
+                            <div class="row">
+                                <div class="col-3">
+
+                                </div>
+                
+                                
+                                <div class="col-sm mt-2" >
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Documento</span>
+                                        <div>
+                                            <input type="number" style="width: 150px;" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" formControlName="documento">
+                                        </div>
+                                       <button type="button" class="btn btn-primary mx-4" (click)="buscar()">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-fluid" *ngIf="general">
+
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    LISTADO DE REGISTROS POR USUARIO
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+
+                        <div class="input-group">
+                            <p class="col-2"><b>Nombre</b></p>
+                            <p> {{usuario.apellido + " " + usuario.nombre}} </p>
+                        </div>
+                        <div class="input-group">
+                            <p class="col-2"><b>Domicilio</b></p>
+                            <p> {{usuario.domicilio }}</p>
+                        </div>
+                        <div class="input-group">
+                            <p class="col-2"><b>Provincia</b></p>
+                             <p> {{usuario.provincia.nombre}} </p>
+                        </div>
+
+                        <div class="input-group">
+                            <p class="col-2"><b>Email</b></p>
+                            <p> {{usuario.email }}</p>
+                        </div>
+
+                        <div class="input-group">
+                            <p class="col-2"><b>Telefono</b></p>
+                             <p> {{usuario.telefono}} </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="row mt-2 my-1">
+                            <div class="col-2">
+                                <input type="text" style="width: 150px;" class="form-control" placeholder="Buscar..." name="filterProduct" [(ngModel)]="filter">
+                            </div>
+                        </div>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Patente</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Grabado</th>
+                                    <th scope="col">Formulario 12</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let lst of turnos | filtroporusuario: filter | paginate: { itemsPerPage: 8, currentPage: page } " >
+                                    <td>{{ lst.fecha | fecha  }}</td>
+                                    <td>{{ lst.vehiculo.patente }}</td>
+                                    <td>{{ lst.vehiculo.modelo }}</td>
+                                    
+                                    <td *ngIf="lst.pagado">FINALIZADO</td>
+                                    <td *ngIf="!lst.pagado && lst.isDeleted && lst.ingreso">CANCELADO</td>
+                                    <td *ngIf="!lst.pagado && !lst.isDeleted && lst.ingreso">PENDIENTE</td>
+                                    <td *ngIf="!lst.pagado && !lst.isDeleted && !lst.ingreso">NO CONCURRIO</td>
+                                    
+
+                                   
+                                         <td *ngIf="lst.vehiculo.autopartes && lst.vehiculo.cristales">AUTOPARTES/CRISTALES </td>
+                                        <td *ngIf="!lst.vehiculo.autopartes && lst.vehiculo.cristales">CRISTALES</td>
+                                        <td *ngIf="lst.vehiculo.autopartes && !lst.vehiculo.cristales">AUTOPARTES</td>
+                                        <td *ngIf="!lst.vehiculo.autopartes && !lst.vehiculo.cristales">SIN GRABAR</td>
+                                    
+
+                                    
+                                         <td *ngIf="lst.formulario!=null"> {{lst.formulario.numeroFormulario}}</td>
+                                         <td *ngIf="lst.formulario==null"> SIN REGISTROS</td>
+                                  
+                         
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

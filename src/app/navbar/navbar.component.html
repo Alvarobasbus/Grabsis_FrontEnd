@@ -1,16 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a4275;" >
     <div class="container-fluid">
       <a class="navbar-brand" href="#">GRABSIS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div  class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul *ngIf="currentID>0" class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        <ul *ngIf="isLogin" class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
+          <li class="nav-item dropdown" *ngIf="empleado.rol.descripcion=='Gerente' || empleado.rol.descripcion=='Administrador' ">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Caja
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="generarOrden" routerLinkActive="active" href="">Generar Orden</a></li>
+              <li><a class="dropdown-item" routerLink="listadoOrdenes" routerLinkActive="active" href="">Ordenes Generadas</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="agregarEgreso" routerLinkActive="active" href="">Agregar Gastos</a></li>
+              <li><a class="dropdown-item" routerLink="agregarDeposito" routerLinkActive="active" href="">Agregar Depositos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="informedecaja" routerLinkActive="active" href="">Informe de Caja</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Caja</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Ingresos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="ingreso" routerLinkActive="active" href="">Registrar Ingresos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="listadoingreso" routerLinkActive="active" href="">Listado de Ingresos confirmados</a></li>
+            </ul>
           </li>
 
           <li class="nav-item dropdown">
@@ -18,20 +40,33 @@
               Turno
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="turno" routerLinkActive="active" href="">Registrar</a></li>
+              <li><a class="dropdown-item" routerLink="turno" routerLinkActive="active" href="">Registrar turno</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="listaturno" routerLinkActive="active" href="">Listado</a></li>
+              <li><a class="dropdown-item" routerLink="listaturno" routerLinkActive="active" href="">Listado de turnos</a></li>
             </ul>
-          </li>
-          
+          </li>   
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Empleado
+              Formulario
             </a>
             <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
-              <li><a class="dropdown-item" routerLink="registrarempleado" routerLinkActive="active" href="">Registrar</a></li>
+              <li><a class="dropdown-item" routerLink="agregarFormulario" routerLinkActive="active" href="">Registrar Formulario</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="listaempleado" routerLinkActive="active" href="">Listado</a></li>
+              <li><a class="dropdown-item"  routerLink="listadoFormularios" routerLinkActive="active" href="">Listado de Formularios</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Grabado
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="RegistrarGrabado" routerLinkActive="active" href="">Grabado de Autopartes</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="RegistrarGrabadoCristales" routerLinkActive="active" href="">Grabado de Cristales</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item"  routerLink="ListadoGrabados" routerLinkActive="active" href="">Listado de Grabados</a></li>
             </ul>
           </li>
 
@@ -40,37 +75,61 @@
               Usuario
             </a>
             <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
-              <li><a class="dropdown-item" routerLink="registrarUsuario" routerLinkActive="active" href="">Registrar</a></li>
+              <li><a class="dropdown-item" routerLink="registrarUsuario" routerLinkActive="active" href="">Registrar usuario</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item"  routerLink="modificarusuario" routerLinkActive="active" href="">Modificar</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="eliminarusuario" routerLinkActive="active" href="">Eliminar</a></li>
+              <li><a class="dropdown-item"  routerLink="listadoUsuario" routerLinkActive="active" href="">Buscar por documento</a></li>
             </ul>
           </li>
           
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="empleado.rol.descripcion=='Gerente' || empleado.rol.descripcion=='Administrador' ">
             <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Marca
+              Administracion
             </a>
             <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
-              <li><a class="dropdown-item" routerLink="marca" routerLinkActive="active" href="">Registrar</a></li>
+              <li><a class="dropdown-item" routerLink="marca" routerLinkActive="active" href="">Registrar Marca</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="insumos" routerLinkActive="active" href="">Stock</a></li>
+              <li *ngIf="empleado.rol.descripcion=='Gerente'"><hr class="dropdown-divider"></li>
+              <li  *ngIf="empleado.rol.descripcion=='Gerente'" ><a class="dropdown-item" routerLink="registrarempleado" routerLinkActive="active" href="" >Registrar Empleado</a></li>
+              <li *ngIf="empleado.rol.descripcion=='Gerente'" ><a class="dropdown-item" routerLink="listaempleado" routerLinkActive="active" href="">Listado Empleados</a></li>
+              <li *ngIf="empleado.rol.descripcion=='Gerente'"><hr class="dropdown-divider"></li>
+              <li *ngIf="empleado.rol.descripcion=='Gerente'"><a class="dropdown-item" routerLink="servicios" routerLinkActive="active" href="">Servicios</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="listadoEgresos" routerLinkActive="active" href="">Listado de Gastos</a></li>
+              <li><a class="dropdown-item" routerLink="listadoDepositos" routerLinkActive="active" href="">Listado de Depositos</a></li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link disabled " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <li class="nav-item dropdown" *ngIf="empleado.rol.descripcion=='Gerente' ">
+            <a class="nav-link dropdown-toggle" href="#" id="emplnavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Informes
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
+              <li><a class="dropdown-item" routerLink="informeInsumos" routerLinkActive="active" href="">Informe de Insumos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="informeServicios" routerLinkActive="active" href="">Informe de Servicios</a></li>
+            </ul>
           </li>
+
+
+          
         </ul>
         <ul  class="navbar-nav ms-auto ">
-            <li class="nav-item" *ngIf="currentID==0">
+            <li class="nav-item" *ngIf="isLogin==false">
                 <a class="nav-link" routerLink="turno" routerLinkActive="active"  href="#">Solicitar Turno</a>
             </li>
-            <li class="nav-item" *ngIf="currentID==0">
+            <li class="nav-item" *ngIf="isLogin==false">
                 <a class="nav-link" routerLink="login" routerLinkActive="active" href="#">Iniciar Sesion</a>
             </li>
-            <li *ngIf="currentID>0" class="nav-item">
-              <span>{{empleado.apellido + " " + empleado.nombre}}</span>
-          </li>
+            <li *ngIf="isLogin" class="nav-item">
+              <i class="bi bi-person-fill"></i>
+              <span routerLink="modificarempleado" routerLinkActive="active" href="#">{{empleado.apellido + " " + empleado.nombre}}</span>
+            </li>
+            <li *ngIf="isLogin" class="nav-item mx-3" (click)="cerrarSesion()">
+              <i class="bi bi-box-arrow-right">SALIR</i>
+            </li>
+
+            
         </ul>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Empleado } from 'src/app/models/empleado';
+import { AuthService } from 'src/app/services/auth.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { HelperService } from 'src/app/services/helper.service';
 
@@ -14,12 +15,13 @@ import { HelperService } from 'src/app/services/helper.service';
 export class IniciarSesionComponent implements OnInit {
 
   formulario: FormGroup;
+  
   empleado: Empleado;
 
   private subscripcion =new Subscription();
 
   constructor(private formBuilder: FormBuilder, private router: Router, private empleadoService: EmpleadoService,
-    private helperservice: HelperService){
+    private helperservice: HelperService, private authService: AuthService){
 
   }
 
@@ -39,10 +41,8 @@ export class IniciarSesionComponent implements OnInit {
       this.empleadoService.postLogin(this.empleado).subscribe({
         next: (resultado)=>{
           this.empleado=resultado;
-          alert('Logeado correctamente')
-          this.empleado.contrasenia="null";
-          this.helperservice.setCurrentEmpleado(this.empleado)
-          this.helperservice.setCurrentId(this.empleado.idEmpleado);
+          this.authService.setCurrentEmpleado(this.empleado)
+          console.log(this.empleado)
           this.router.navigate(['empleado']);
         },
         error: (e)=> {

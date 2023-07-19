@@ -11,7 +11,7 @@ export class EmpleadoService {
   constructor(private http: HttpClient) { }
 
   postLogin(empleado: Empleado):Observable<Empleado>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Headers': '*' };
+   // const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Headers': '*' };
     return this.http.post<Empleado>(`${this.URL}/login`, empleado);
   }
 
@@ -37,6 +37,10 @@ export class EmpleadoService {
 
   obtenerPorId(id: number): Observable<Empleado>{
     return this.http.get<Empleado>(`${this.URL}/${id}`);
+  }
+  
+  obtenerPorDocumento(documento: number): Observable<Empleado>{
+    return this.http.get<Empleado>(`${this.URL}/documento/${documento}`);
   }
 
 

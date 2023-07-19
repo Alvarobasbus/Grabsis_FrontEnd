@@ -1,45 +1,147 @@
-<form [formGroup]="formulario">
-    <div class="container">
-<h3>Modificar empleado</h3>
+<div class="container container-fluid">
 
-
-    </div>
-
-<br>
-    <div class="container">
-        <div class="mb-3">
-            <label for="inputDocumento" class="form-label">Documento:</label>
-            <input type="text" class="form-control" id="inputDocumento" formControlName="documento" >
-        </div>
+    <form [formGroup]="formulario" >
+        <div class="container">
+            <div class="container">
+                <br>
+                <br>
+                <h3 style="color:#1f60e2">EMPLEADO</h3>
+                <p> <strong>REGISTRO</strong></p>
     
-        <div class="mb-3">
-            <label for="inputNombre" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="inputNombre" formControlName="nombre" >
-        </div>
-        <div class="mb-3">
-            <label for="inputApellido" class="form-label">Apellido:</label>
-            <input type="text" class="form-control" id="inputApellido" formControlName="apellido" >
-        </div>
-        <div class="mb-3">
-            <label for="inputcontrasenia" class="form-label">Contraseña:</label>
-            <input type="password" class="form-control" id="inputcontrasenia" formControlName="contrasenia" >
-        </div>
-        <div class="mb-3">
-            <label for="rol" class="form-label">Rol:</label>
-            <select class="form-select" id="rol" formControlName="rol">
-                <option *ngFor="let lst of roles" [value]="lst.id">
-                    {{ lst.descripcion }}
-                </option>
-            </select>
-        </div>
-
+                <div class="progress" style="height: 1px;">
+                    <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 99%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
         
+            </div>
+    
+        </div>
+    
+    <br>
+    <br>
+    <div class="container">
+    
+        <div class="row">
+          
+                <div class="row">
+    
+                       <div class="col-sm-5">
+                    <div class="col">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Documento</span>
+                            <div class="col">
+                                <input type="text" class="form-control"  readonly placeholder="Numero de Documento" aria-label="Username" aria-describedby="basic-addon1" formControlName="documento">
+                            </div>
+                        </div>
+                  </div>
     
     
-        <button type="submit" class="btn btn-primary" (click)="guardarEmpleado()">Guardar</button>
-        <button type="submit" class="btn btn-secondary">limpiar</button>
-
-
+                </div>
+                </div>
+             
+            
+        </div>
+    
+    
+       <form [formGroup]="formulario">
+            <div class="row">
+    
+                <div class="col-lg-5 mt-2">
+                    <div class="col ">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Nombre</span>
+                            <div class="col" >
+                                <input type="text" class="form-control"  placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" formControlName="nombre">
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="col-sm-5 mt-2">
+                    <div class="col ">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Apellido</span>
+                            <div class="col" >
+                                <input type="text" class="form-control"  placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" formControlName="apellido">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        <div class="row">
+            <form [formGroup]="pass" >
+                <div class="row ">
+                    <div class="col-sm-5 mt-2">
+    
+                <div class="col">
+                    <div class="input-group ">
+                        <span class="input-group-text" id="basic-addon1" style="width: 105px;">Contraseña</span>
+                        <div class="col" >
+                            <input type="password" class="form-control" placeholder="contraseña" aria-label="Username" aria-describedby="basic-addon1" formControlName="contrasenia">
+                        </div>
+                    </div>
+                </div>
+             
+    
+            </div>
+    
+            <div class="col-sm-5 mt-2">
+    
+                <div class="col">
+                    <div class="input-group ">
+                        <span class="input-group-text" id="basic-addon1" style="width: 105px;">Contraseña</span>
+                        <div class="col" >
+                            <input type="password" class="form-control" placeholder="Repita la contraseña" aria-label="Username" aria-describedby="basic-addon1" formControlName="contrasenia2">
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+                </div>
+                 
+            </form>
+           
+    
+    
+        </div>
+    
+    
+        <div class="row">
+    
+            <div class="col-sm-5 mt-2">
+    
+                <div class="col-sm-5 mt-2">
+                    <div class="col ">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Rol</span>
+                            <div class="col" >
+                                <input type="text" class="form-control" readonly placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" formControlName="rol">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <mat-error *ngIf="pass.errors">La contraseña no coincide</mat-error>
+            </div>
+    
+        </div>
+    
+        
+        <div>
+            <br>
+        </div>
+    
+        <button  type="submit" class="btn btn-primary" style="width: 105px;" [disabled]="formulario.invalid && formulario.pristine || pass.errors" (click)="guardarEmpleado()">GUARDAR</button>
+        <button type="submit" class="btn btn-danger mx-2" style="width: 105px;" (click)="cancelar()">SALIR</button>
+        </form>
+    
+    
+    
     </div>
+    </form>
+    
+    
 
-</form>
+</div>

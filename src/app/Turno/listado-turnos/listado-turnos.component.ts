@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Turno } from 'src/app/models/turno';
 import { TurnoService } from 'src/app/services/turno.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listado-turnos',
@@ -12,13 +13,21 @@ import { TurnoService } from 'src/app/services/turno.service';
   styleUrls: ['./listado-turnos.component.css']
 })
 export class ListadoTurnosComponent implements OnInit{
-
+  public page: number;
   formulario: FormGroup;
+  pipe = new DatePipe('en-US');
   fecha: Date;
+  fecha1: any;
   fecha2: any;
   turnos: Turno[];
+  fechaHoy:any;
   private subscripcion =new Subscription();
+  resul: boolean;
+  busqueda: boolean;
+ 
+  hoy= new Date;
   
+  filterTurno: any = '';
 
 
   constructor(private turnoservice: TurnoService,
@@ -28,38 +37,66 @@ export class ListadoTurnosComponent implements OnInit{
 
   ngOnInit(): void {
     this.formulario=this.formBuilder.group({
-      fecha: [, Validators.required]
+      fecha1: [, Validators.required],
+      fecha2: [, Validators.required]
 
     })
 
-    console.log(Date.now)
+
+
+    this.setFechaActual()
+    this.buscar()
 
 
   }
 
-  buscar(){
+  setFechaActual(){
+    this.fechaHoy= this.pipe.transform(this.hoy, 'YYYY-MM-dd');
+     this.formulario.controls['fecha1'].setValue(this.fechaHoy)
+     this.formulario.controls['fecha2'].setValue(this.fechaHoy)
+   }
+
+   buscar(){
+
     if(this.formulario.invalid){
-      alert('debe introducir una fecha')
+      Swal.fire({
+        title: 'Debe ingresar correctamente ambas fechas',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
       return
     }
 
-    this.fecha=this.formulario.controls['fecha'].value;
-    //var datePipe = new DatePipe();
-    this.fecha2 = this.datePipe.transform(this.fecha, 'dd/MM/yyyy');
-   
+
+    if(this.formulario.controls['fecha2'].value<this.formulario.controls['fecha1'].value){
+      Swal.fire({
+        title: 'La fecha ingresada en el campo desde no puede ser mayor a la fecha del campo hasta',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
+
+    this.fecha1=this.formulario.controls['fecha1'].value;
+    this.fecha2=this.formulario.controls['fecha2'].value
 
 
     this.subscripcion.add(
-      this.turnoservice.obtenerPorFecha(this.fecha).subscribe({
+      this.turnoservice.obtenerPorFechas(this.fecha1,this.fecha2).subscribe({
         next: (respuesta) =>{
-          this.turnos=respuesta
-        } ,
+          this.turnos=respuesta;
+          
+        },
         error: () => {
-          alert('No se encontraron turnos para la fecha: ' + this.fecha2 );
+          this.resul=false;
+          Swal.fire({
+            title: 'Erro al obtener el listado',
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       })
     );
-
 
   }
 
@@ -70,14 +107,21 @@ export class ListadoTurnosComponent implements OnInit{
     this.subscripcion.add(
       this.turnoservice.delete(id).subscribe({
         next: (respuesta) =>{
-          alert('Turno eliminado correctamente')
-          this.formulario.controls['fecha'].setValue("");
-          this.router.navigate(['listaturno']);
+          Swal.fire({
+            title: 'Turno Eliminado correctamente',
+            icon: 'success',
+            confirmButtonText: "Ok",
+          });
+        this.buscar()
 
 
         },
-        error: () => {
-          alert('Error al turno el empleado');
+        error: (e) => {
+          Swal.fire({
+            title: `${e.error.message}`,
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
         },
       })
     );

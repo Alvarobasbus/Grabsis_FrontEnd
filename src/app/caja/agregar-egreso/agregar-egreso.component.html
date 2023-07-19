@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card col-md-6 offset-md-3">
+                    <div class="card-header text-white bg-primary" >
+                      AGREGAR GASTOS
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row justify-content-center">
+                        <form [formGroup]="formulario">
+    
+
+                            <div class="row">
+                                <div class="input-group">
+                                    <p class="col-3">Fecha</p>
+                                    <span class="input-group-text col-1" id="basic-addon1"><i class="bi bi-calendar3"></i></span>
+                                     <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-group mb-2 mt-2">
+                                    <p class="col-3">Factura</p>
+                                    <span class="input-group-text col-1"><i class="bi bi-receipt"></i></span>
+                                    <input type="text" class="form-control" placeholder="Numero de Factura" aria-label="Cantidad (al dólar más cercano)" formControlName="numeroFactura">
+                                  </div>
+                            </div>
+
+                            <div class="input-group">
+                                <p class="col-3">Tipo de Factura</p>
+                                <span class="input-group-text col-1"><i class="bi bi-card-text"></i></span>
+                                <select class="form-select" id="inputGroupSelect01" formControlName="tipoFactura">
+                                    <option value="value1" selected disabled>TIPO DE FACTURA</option>
+                                    <option value="FACTURA A" >FACTURA A</option>
+                                    <option value="FACTURA B" >FACTURA B</option>
+                                    <option value="FACTURA C" >FACTURA C</option>
+                                    <option value="VALE DE CAJA" >VALE DE CAJA</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-group mb-2 mt-2">
+                                    <p class="col-3">Concepto</p>
+                                    <span class="input-group-text col-1"><i class="bi bi-pencil"></i></span>
+                                    <input type="text" class="form-control" placeholder="Concepto" aria-label="Cantidad (al dólar más cercano)" formControlName="concepto">
+                                  </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <p class="col-3">Importe</p>
+                                    <span class="input-group-text col-1"><i class="bi bi-currency-dollar"></i></span>
+                                    <input type="number" class="form-control" formControlName="importe" placeholder="Importe" aria-label="Cantidad (al dólar más cercano)">
+                                  </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="form-outline col-12 mb-3 mt-2">
+                                        <button type="button" class="btn btn-primary" (click)="agregaregreso()">Agregar</button>
+                                        <button type="button" class="btn btn-secondary mx-2" (click)="cancelar()">Cancelar</button>
+
+                                     </div>
+                                </div>
+                                
+                            </div>
+
+                        </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

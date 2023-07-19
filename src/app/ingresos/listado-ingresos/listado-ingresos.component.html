@@ -1,0 +1,95 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                      Turnos registrados - Busqueda por fecha
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+                        <form [formGroup]="formulario" >
+                            <div class="row">
+                                <div class="col-1"></div>
+                    
+                                <div class="col-sm mt-2">
+                                    <div class="input-group ">
+                                        <span class="input-group-text" id="basic-addon1">Desde</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha1">
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                     
+                                <div class="col-sm mt-2">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Hasta</span>
+                                        <div class="col">
+                                            <input type="date" class="form-control" placeholder="Fecha" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha2">
+                  
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 mt-2">
+                                    <div class="form-outline">
+                                        <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+                                     </div>
+                                </div>  
+                            </div>
+                        </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container container-fluid" >
+
+    <div class="row">
+
+        <div class="col">
+            <div class="mt-5">
+                <div class="card">
+                    <div class="card-header text-white bg-primary" >
+                    Listado de vehiculo ingresados 
+                    </div>
+                    <div class="row mt-2 my-1">
+                        <div class="col-2">
+                            <input type="text" class="form-control" placeholder="Buscar turnos..." name="filterProduct"[(ngModel)]="filterTurno">
+                        </div>
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="row">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Vehiculo</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let lst of turnos | filtroTurnos: filterTurno | ingresoconfirmado | paginate: { itemsPerPage: 5, currentPage: page } " >
+                                    <td>{{ lst.hora }}</td>
+                                    <td>{{ lst.vehiculo.tipo }}</td>
+                                    <td>{{ lst.vehiculo.patente }}</td>
+                                    <td>{{ lst.vehiculo.modelo }}</td>
+                                    <td>{{ lst.usuario.apellido + " " + lst.usuario.nombre  }}</td>
+                                    <td *ngIf="lst.pagado">PAGADO</td>
+                                    <td *ngIf="!lst.pagado">INGRESO</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

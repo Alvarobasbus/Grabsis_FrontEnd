@@ -7,8 +7,7 @@ export class Usuario{
     telefono: number;
     email: string;
     domicilio: string;
-    provincia?: Provincia;
-   //idProvincia?: number;
+    provincia: Provincia;
    isDeleted: boolean=false;
 
 }
