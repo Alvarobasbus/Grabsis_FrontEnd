@@ -1,3 +1,13 @@
+<div class="container mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Administracion</li>
+          <li class="breadcrumb-item active" aria-current="page">Listado de Depositos</li>
+        </ol>
+    </nav>
+</div>
+
 <div class="container"  *ngIf="modi">
     <div class="row justify-content-center">
         <div class="col">
@@ -146,7 +156,7 @@
                                 <td>{{ lst.fecha | fecha  }}</td>
                                 <td>{{ lst.numeroTramite }}</td>
                                 <td>{{ lst.banco }}</td>
-                                <td>{{ lst.importe }}</td>
+                                <td>{{ lst.importe | precio }}</td>
                                 <td>
                                     <div class="btn-group" >
                                         <button type="button" class="btn btn-outline-secondary"  (click)="modificar(lst)">

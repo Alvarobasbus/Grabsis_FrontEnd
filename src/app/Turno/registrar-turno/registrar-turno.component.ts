@@ -20,6 +20,8 @@ import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-registrar-turno',
@@ -80,9 +82,24 @@ export class RegistrarTurnoComponent implements OnInit {
       this.fechaa= this.pipe.transform(date, 'YYYY-MM-dd');
       //console.log(this.fechaa)
      
-      return day !== 0 && day !== 6 && this.filtradofecha(this.fechaa)
+      return day !== 0 && day !== 6 && this.filtradofecha(this.fechaa) && this.filtradofechaHoy(this.fechaa)
       //0 means sunday
       //6 means saturday
+  }
+
+  filtradofechaHoy(fecha: any):boolean{
+    let boolean=true;
+    var d2=fecha;
+
+    var d = new Date();
+    d2 = this.pipe.transform(d, 'YYYY-MM-dd');
+    if(fecha<=d2 && !this.isLogin){
+      boolean=false;
+    }
+    if(fecha<d2 && this.isLogin){
+      boolean=false;
+    }
+    return boolean;
   }
 
   filtradofecha(fecha: any): boolean{
@@ -548,7 +565,7 @@ export class RegistrarTurnoComponent implements OnInit {
     if(this.isLogin==true){
       this.turno.empleado=this.empleado;
       console.log(this.formTurno.controls['fecha'].value)
-      return
+      
     }
     this.turno.fecha=this.formTurno.controls['fecha'].value
     this.turno.hora=this.formTurno.controls['hora'].value

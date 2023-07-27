@@ -1,0 +1,13 @@
+p.primeralinea {
+    text-indent: 40px;
+  }
+
+  .card {
+    min-height: 250px;
+    min-width: 250px;
+    background-color: #fcfcf7;
+  }
+
+  .card-text {
+    font-size: 14px;
+  }

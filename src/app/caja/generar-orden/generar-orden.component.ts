@@ -226,6 +226,7 @@ export class GenerarOrdenComponent implements OnInit {
 
   confirmarOrden(){
 
+    /*
     if(this.formulario2.controls['metodo'].value==5){
       console.log("mercado apgo")
 
@@ -246,6 +247,7 @@ export class GenerarOrdenComponent implements OnInit {
     }
 
 
+    */
   
 
     if(this.precioTotal>0){

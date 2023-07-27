@@ -1,3 +1,13 @@
+<div class="container mt-2">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item active">Administracion</li>
+        <li class="breadcrumb-item active" aria-current="page">Stock</li>
+      </ol>
+  </nav>
+</div>
+
 <div class="container" *ngIf="modi">
 
 
@@ -91,7 +101,7 @@
                                 <td WIDTH="120">
                                         <div class="">
                                             <form [formGroup]="formulario2">
-                                                <input type="number" class="form-control" min="0" formControlName="numero">
+                                                <input type="number" class="form-control" min="1" formControlName="numero">
                                             </form>
                                          
                                         </div>

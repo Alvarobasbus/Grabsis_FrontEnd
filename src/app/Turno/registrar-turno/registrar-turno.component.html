@@ -1,3 +1,13 @@
+<div class="container mt-2" *ngIf="isLogin">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Turno</li>
+          <li class="breadcrumb-item active" aria-current="page">Registrar Turno</li>
+        </ol>
+    </nav>
+</div>
+
 <div *ngIf="registroExito">
     <div id="invoice" >
         <div class="container">
@@ -383,44 +393,48 @@
                 <div class="col-sm-5 mt-2">
                     <div class="col">
                         <div class="input-group ">
-                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Fecha</span>
                             <div class="col">
-                                <input type="date" id="date" for="date" class="form-control" placeholder="Numero del motor del vehiculo" aria-label="Username" aria-describedby="basic-addon1" formControlName="fecha">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Seleccion una fecha</mat-label>
+                                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" formControlName="fecha">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Seleccion una fecha</mat-label>
-                                <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" formControlName="fecha">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                              </mat-form-field>
-                        </div>
                      </div>
                 </div>
+
+
+
             </div>
 
             <div class="row">
                 <div class="col-sm-5 mt-2">
                     <div class="col">
                         <div class="input-group ">
-                            <span class="input-group-text" id="basic-addon1" style="width: 105px;">Horario</span>
+                
                             <div class="col">
+
+                                <mat-form-field style="width: 250px;">
+                                    <mat-label>Seleccione un horario</mat-label>
+                                    <mat-select disableRipple id="hora" formControlName="hora">
+                                      <mat-option  value="08:00">08:00</mat-option >
+                                      <mat-option  value="08:30">08:30</mat-option >
+                                      <mat-option  value="09:00">09:00</mat-option >
+                                      <mat-option  value="09:30">09:30</mat-option >
+                                      <mat-option  value="10:00">10:00</mat-option >
+                                      <mat-option  value="10:30">10:30</mat-option >
+                                      <mat-option  value="11:00">11:00</mat-option >
+                                      <mat-option  value="11:30">11:30</mat-option >
+                                      <mat-option  value="12:00">12:00</mat-option >
+                                      <mat-option  value="12:30">12:30</mat-option >
+                                    </mat-select>
+                                  </mat-form-field>
+                                  
                                 
-                            <select class="form-select" size="auto" id="hora" formControlName="hora">
-                                <option value="1" disabled selected>Seleccione un horario</option>
-                                <option value="8:00">08:00</option>
-                                <option value="8:30">08:30</option>
-                                <option value="9:00">09:00</option>
-                                <option value="9:30">09:30</option>
-                                <option value="10:00">10:00</option>
-                                <option value="10:30">10:30</option>
-                                <option value="11:00">11:00</option>
-                                <option value="11:30">11:30</option>
-                                <option value="12:00">12:00</option>
-                                <option value="12:30">12:30</option>
-                            </select>
+                 
                                                           
                             </div>
                         </div>

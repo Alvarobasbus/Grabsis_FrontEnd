@@ -1,3 +1,15 @@
+<div class="container mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Caja</li>
+          <li class="breadcrumb-item active" aria-current="page">Generar Orden</li>
+        </ol>
+    </nav>
+</div>
+
+
+
 <div class="container">
     <div *ngIf="porPagar==false && pagoExito==false">
         <div class="row">
@@ -325,6 +337,7 @@
                                     || det.servicio.descripcion=='GRABADO DE CRISTALES' && turnoPorPagar.vehiculo.cristales==false && turnoPorPagar.vehiculo.tipo=='AUTOMOVIL'  
                                     || det.servicio.descripcion=='GRABADO DE AUTOPARTES' && turnoPorPagar.vehiculo.autopartes==false && turnoPorPagar.vehiculo.tipo=='CAMION'
                                     || det.servicio.descripcion=='GRABADO DE CRISTALES' && turnoPorPagar.vehiculo.cristales==false && turnoPorPagar.vehiculo.tipo=='CAMION'  
+                                    || det.servicio.descripcion!=='FORMULARIO 12' && det.servicio.descripcion!=='GRABADO DE CRISTALES'  && det.servicio.descripcion!=='GRABADO DE AUTOPARTES'
                                     " 
                                     type="checkbox" id="defaultCheck1" formControlName="formulario12">
                                     <label class="form-check-label">{{det.servicio.descripcion}}</label>
