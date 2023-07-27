@@ -88,19 +88,41 @@ export class RegistrarIngresoComponent implements OnInit {
   }
 
   eliminar(id: number){
-    this.subscripcion.add(
-      this.turnoservice.delete(id).subscribe({
-        next: () =>{
-          console.log('Turno eliminado correctamente')
-          this.obtener()
 
 
-        },
-        error: () => {
-          console.log('Error al eliminar el turno');
-        },
-      })
-    );
+    Swal.fire({
+      title: `¿Desea Eliminar el Ingreso del Vehiculo?`  ,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) =>{
+      if(result.isConfirmed){ 
+
+        this.subscripcion.add(
+          this.turnoservice.delete(id).subscribe({
+            next: () =>{
+              this.obtener()
+    
+    
+            },
+            error: () => {
+              console.log('Error al eliminar el turno');
+            },
+          })
+        );
+      
+      }
+    })
+
+
+
+
+
+
+
     
   }
 

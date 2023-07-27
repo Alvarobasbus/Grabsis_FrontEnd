@@ -19,6 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+
 
 import { MatNativeDateModule} from '@angular/material/core';
 import { EmpleadoComponent } from './inicio/empleado/empleado.component';
@@ -164,7 +166,8 @@ import { InformeServiciosComponent } from './informes/informe-servicios/informe-
     MatToolbarModule,
     MatIconModule,
     NgxPaginationModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatSelectModule
 
   ],
   providers: [ DatePipe, LogeadoGuard],

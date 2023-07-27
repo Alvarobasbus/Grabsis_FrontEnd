@@ -62,10 +62,10 @@
               Grabado
             </a>
             <ul class="dropdown-menu" aria-labelledby="emplnavbarDropdown">
-              <li><a class="dropdown-item" routerLink="RegistrarGrabado" routerLinkActive="active" href="">Grabado de Autopartes</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="RegistrarGrabadoCristales" routerLinkActive="active" href="">Grabado de Cristales</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li *ngIf="empleado.rol.descripcion!='Administrador'"><a class="dropdown-item" routerLink="RegistrarGrabado" routerLinkActive="active" href="">Grabado de Autopartes</a></li>
+              <li *ngIf="empleado.rol.descripcion!='Administrador'"><hr class="dropdown-divider"></li>
+              <li *ngIf="empleado.rol.descripcion!='Administrador'" ><a class="dropdown-item" routerLink="RegistrarGrabadoCristales" routerLinkActive="active" href="">Grabado de Cristales</a></li>
+              <li *ngIf="empleado.rol.descripcion!='Administrador'" ><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item"  routerLink="ListadoGrabados" routerLinkActive="active" href="">Listado de Grabados</a></li>
             </ul>
           </li>

@@ -44,7 +44,7 @@ export class ListadoIngresosComponent {
 
 
     this.setFechaActual()
-
+    this.buscar()
 
   }
 
@@ -107,6 +107,7 @@ export class ListadoIngresosComponent {
   }
 
   eliminar(id: number){
+
 
     this.subscripcion.add(
       this.turnoservice.delete(id).subscribe({
