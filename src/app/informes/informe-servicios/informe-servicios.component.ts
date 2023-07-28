@@ -1,10 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Chart, registerables} from 'node_modules/chart.js'
 import { Subscription } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { InformeInsumos } from 'src/app/models/informeInsumos';
 import { InformeServicios } from 'src/app/models/informeServicios';
+import { AuthService } from 'src/app/services/auth.service';
 import { InformesService } from 'src/app/services/informes.service';
 import Swal from 'sweetalert2';
 Chart.register(...registerables);
@@ -34,6 +37,9 @@ export class InformeServiciosComponent implements OnInit {
 
   labeldata:any[]=[];
   realdata:any[]=[];
+  isLogin: boolean=false;
+  currentID: number=0;
+  empleado: Empleado;
 
 
 
@@ -44,11 +50,20 @@ export class InformeServiciosComponent implements OnInit {
   public page: number;
 
   constructor(private formBuilder: FormBuilder,
-    private informeService: InformesService
+    private informeService: InformesService,
+    private authService: AuthService,
+private router: Router
     ){
 
   }
   ngOnInit(): void {
+
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.formulario=this.formBuilder.group({
       fecha1: [, Validators.required],
       fecha2: [, Validators.required],

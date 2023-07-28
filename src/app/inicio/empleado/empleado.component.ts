@@ -46,6 +46,10 @@ export class EmpleadoComponent implements OnInit {
   realdata2: any[]=[];
   grafico2: any;
 
+  isLogin: boolean=false;
+currentID: number=0;
+empleado: Empleado;
+
   constructor(private authService: AuthService,
     private servicioService: ServiciosService,
     private informeCajaService: InformeCajaService,
@@ -55,9 +59,16 @@ export class EmpleadoComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
-      this.empleadoLog = currentEmpleado;
+      this.empleado = currentEmpleado;
+      this. empleadoLog=currentEmpleado;
+      this.currentID= this.empleado.idEmpleado
     })
+
+  if(this.isLogin==false){
+      this.router.navigate(['']);
+    }
 
     this.traerServicios()
 

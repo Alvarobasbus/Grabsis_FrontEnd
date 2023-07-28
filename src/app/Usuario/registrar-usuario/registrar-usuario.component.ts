@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { Provincia } from 'src/app/models/provincia';
 import { Usuario } from 'src/app/models/usuario';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProvinciaService } from 'src/app/services/provincia.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -23,14 +25,28 @@ export class RegistrarUsuarioComponent implements OnInit {
   provincias: Provincia[];
   pro: Provincia;
   private subscripcion =new Subscription();
+  isLogin: boolean=false;
+currentID: number=0;
+empleado: Empleado;
+
 
 constructor(private formBuilder: FormBuilder, private router: Router, private provinciaService: ProvinciaService,
-  private usuarioService: UsuarioService){
+  private usuarioService: UsuarioService,
+  private authService: AuthService){
 
 }
 
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+    this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
+      this.empleado = currentEmpleado;
+      this.currentID= this.empleado.idEmpleado
+    })
+
+  if(this.isLogin==false){
+      this.router.navigate(['']);
+    }
     this.formulario=this.formBuilder.group({
       nombre: [, Validators.required],
       apellido: [, Validators.required],

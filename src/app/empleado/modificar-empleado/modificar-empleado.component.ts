@@ -24,7 +24,7 @@ export class ModificarEmpleadoComponent implements OnInit {
   formulario: FormGroup;
   pass: FormGroup;
   empleadoLog: Empleado;
-
+  isLogin: boolean=false;
   filtro: any = '';
 
   lista:boolean;
@@ -41,6 +41,12 @@ export class ModificarEmpleadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.formulario=this.formBuilder.group({
       documento: [,Validators.required ],
       nombre: [, Validators.required],

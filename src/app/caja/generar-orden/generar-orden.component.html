@@ -345,7 +345,7 @@
                                 <div class="col-sm-3" >
                                     <div class="input-group">
                                         <div class="input-group-text" id="btnGroupAddon">$</div>
-                                        <input type="text" class="form-control" placeholder={{det.servicio.precio}} aria-label="Input group example" aria-describedby="btnGroupAddon" readonly>
+                                        <input type="text" class="form-control" [placeholder]="det.servicio.precio | preciosins"  aria-label="Input group example" aria-describedby="btnGroupAddon" readonly>
                                  
                                     </div>
                                     
@@ -380,7 +380,7 @@
                             <div class="input-group">
                                 <span class="input-group-text">Total</span>
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control input-sm" placeholder={{precioTotal}} readonly aria-label="Dollar amount (with dot and two decimal places)">
+                                <input type="text" class="form-control input-sm" [placeholder]="precioTotal | preciosins" readonly aria-label="Dollar amount (with dot and two decimal places)">
                             </div>
     
                         </div>

@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Empleado } from 'src/app/models/empleado';
 import { Formulario } from 'src/app/models/formulario';
@@ -23,7 +24,7 @@ export class ListadoFormulariosComponent implements OnInit {
   modi: boolean;
 
   empleadoLog: Empleado;
-
+  isLogin: boolean=false;
   hoy= new Date;
   pipe = new DatePipe('en-US');
   fechaHoy:any;
@@ -49,10 +50,17 @@ export class ListadoFormulariosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private turnoService: TurnoService,
     private formularioService: FormularioService,
-    private authService: AuthService){
+    private authService: AuthService,
+    private router: Router){
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
       this.empleadoLog = currentEmpleado;
     })

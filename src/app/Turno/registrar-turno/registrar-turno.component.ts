@@ -133,12 +133,13 @@ export class RegistrarTurnoComponent implements OnInit {
       this.empleado = currentEmpleado;
       this.currentID= this.empleado.idEmpleado
     })
+
     this.user=true;
     this.mostrarVehiculo=false;
     this.mostrarRegistroTurno=false;
 
     this.formDni=this.formBuilder.group({
-      documento: [, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
+      documento: [, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(/^[0-9]\d{6,10}$/)]]
     }
     )
 
@@ -559,8 +560,20 @@ export class RegistrarTurnoComponent implements OnInit {
         icon: 'error',
         confirmButtonText: "Ok",
       });
+
+      return
     }
 
+    /*
+    if(this.formTurno.controls['hora'].value==null || this.formTurno.controls['fecha'].value==null ){
+      Swal.fire({
+        title: 'Debe completar todos los campos',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
+*/
 
     if(this.isLogin==true){
       this.turno.empleado=this.empleado;

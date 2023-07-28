@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent implements OnInit{
-
+  isLogin: boolean=false;
   empleado: Empleado;
   roles: Rol[];
   formulario: FormGroup;
@@ -35,6 +35,12 @@ export class RegistrarComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
 
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
       this.empleadoLog = currentEmpleado;
