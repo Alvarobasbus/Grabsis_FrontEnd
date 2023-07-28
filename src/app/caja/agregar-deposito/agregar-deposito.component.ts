@@ -64,7 +64,7 @@ export class AgregarDepositoComponent implements OnInit {
       return
     }
     this.deposito=this.formulario.value
-    this.deposito.banco.toUpperCase()
+    this.deposito.banco= this.deposito.banco.toUpperCase()
     
 
     this.subscripcion.add(

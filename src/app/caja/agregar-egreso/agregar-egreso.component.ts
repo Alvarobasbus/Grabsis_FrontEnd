@@ -67,10 +67,12 @@ export class AgregarEgresoComponent implements OnInit {
       });
       return
     }
+    this.formulario.controls['concepto'].value.toUpperCase()
     this.egreso=this.formulario.value
-    this.egreso.concepto.toUpperCase();
+    this.egreso.concepto= this.egreso.concepto.toUpperCase()
     console.log(this.formulario.controls['importe'].value)
-    
+    console.log(this.egreso.concepto.toUpperCase())
+   
     
     this.subscripcion.add(
       this.egresoService.guardar(this.egreso).subscribe({

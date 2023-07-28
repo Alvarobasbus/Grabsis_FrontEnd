@@ -159,6 +159,15 @@ export class InsumosComponent implements OnInit {
   }
 
   aumentar(insumo: Insumo){
+    if(this.formulario2.controls['numero'].value===null || this.formulario2.controls['numero'].value==0){
+      Swal.fire({
+        title: 'Debe introducir correctamente el numero',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
+
    this.numero=this.formulario2.controls['numero'].value
     this.control()
     this.insumo=insumo
@@ -232,6 +241,14 @@ export class InsumosComponent implements OnInit {
 
 
   restar(insumo: Insumo){
+    if(this.formulario2.controls['numero'].value===null || this.formulario2.controls['numero'].value==0){
+      Swal.fire({
+        title: 'Debe introducir correctamente el numero',
+        icon: 'error',
+        confirmButtonText: "Ok",
+      });
+      return
+    }
     this.numero=this.formulario2.controls['numero'].value
     this.control()
 
