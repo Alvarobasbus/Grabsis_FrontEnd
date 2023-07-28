@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./listado-empleados.component.css']
 })
 export class ListadoEmpleadosComponent implements OnInit{
-
+  isLogin: boolean=false;
   roles: Rol[];
   aRol: Rol;
   empleados: Empleado[];
@@ -41,6 +41,12 @@ export class ListadoEmpleadosComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
 
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
       this.empleadoLog = currentEmpleado;

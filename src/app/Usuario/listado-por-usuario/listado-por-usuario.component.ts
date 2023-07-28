@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { Turno } from 'src/app/models/turno';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,6 +25,9 @@ export class ListadoPorUsuarioComponent implements OnInit {
   busqueda: boolean=true;
   user: boolean=false;
   general: boolean=false;
+  isLogin: boolean=false;
+currentID: number=0;
+empleado: Empleado;
 
   public page: number;
 
@@ -32,10 +37,20 @@ export class ListadoPorUsuarioComponent implements OnInit {
   constructor(private turnoService: TurnoService,
     private usuarioService: UsuarioService,
     private  formBuilder: FormBuilder,
-    private authService: AuthService ){
+    private authService: AuthService,
+    private router: Router ){
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+    this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
+      this.empleado = currentEmpleado;
+      this.currentID= this.empleado.idEmpleado
+    })
+
+  if(this.isLogin==false){
+      this.router.navigate(['']);
+    }
 
     this.formulario=this.formBuilder.group({
       documento: [, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]

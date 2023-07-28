@@ -1,12 +1,12 @@
 export class InformeCaja{
-    saldoTotal: number;
-    saldoCaja: number;
-    efectivo: number;
-    transferencia: number;
-    credito: number;
-    debito: number;
-    mercadoPago: number;
-    deposito: number;
-    egreso: number;
+    saldoTotal: any;
+    saldoCaja: any;
+    efectivo: any;
+    transferencia: any;
+    credito: any;
+    debito: any;
+    mercadoPago: any;
+    deposito: any;
+    egreso: any;
 
 }

@@ -3,11 +3,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 const PADDING = "000000";
 
 @Pipe({
-  name: 'precio'
+  name: 'preciocoma'
 })
-export class PrecioPipe implements PipeTransform {
+export class PreciocomaPipe implements PipeTransform {
 
-  
 
   private DECIMAL_SEPARATOR: string;
   private THOUSANDS_SEPARATOR: string;
@@ -17,13 +16,14 @@ export class PrecioPipe implements PipeTransform {
     this.DECIMAL_SEPARATOR = ",";
     this.THOUSANDS_SEPARATOR = ".";
   }
-
+  
   transform(value: number | string, fractionSize: number = 2): string {
     if(value==null || value==0){
       value="0"
     }
-    value= value.toString().replace(/\./g,',');
 
+    value= value.toString().replace(/\./g,',');
+    
 
     let [ integer, fraction = "" ] = (value || "").toString()
       .split(this.DECIMAL_SEPARATOR); // Divide entre parte entera y decimal, por la "," en este caso
@@ -34,7 +34,9 @@ export class PrecioPipe implements PipeTransform {
 
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.THOUSANDS_SEPARATOR);
 
-    return "$" + integer + fraction;
+    
+
+    return  integer + fraction;
   }
 
   parse(value: string, fractionSize: number = 2): string {
@@ -47,26 +49,9 @@ export class PrecioPipe implements PipeTransform {
       ? this.DECIMAL_SEPARATOR + (fraction + PADDING).substring(0, fractionSize)
       : "";
 
-    return  "$" + integer + fraction;
+    
+
+    return   integer + fraction;
   }
-
-
-
-
-
-
-
-
-
-
-  precio: number;
-
-  //transform(value: any, ...args: unknown[]): unknown {
-
-   // this.precio = value.toFixed(2)
-   
-  //  return  `$${this.precio}`;
-  
- // }
 
 }

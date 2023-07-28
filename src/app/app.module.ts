@@ -84,6 +84,8 @@ import { GastosPipe } from './pipes/gastos.pipe';
 import { AutopartesCristalesPipe } from './pipes/autopartes-cristales.pipe';
 import { InformeInsumosComponent } from './informes/informe-insumos/informe-insumos.component';
 import { InformeServiciosComponent } from './informes/informe-servicios/informe-servicios.component';
+import { PreciosinsPipe } from './pipes/preciosins.pipe';
+import { PreciocomaPipe } from './pipes/preciocoma.pipe';
 
 @NgModule({
   declarations: [
@@ -149,6 +151,8 @@ import { InformeServiciosComponent } from './informes/informe-servicios/informe-
     AutopartesCristalesPipe,
     InformeInsumosComponent,
     InformeServiciosComponent,
+    PreciosinsPipe,
+    PreciocomaPipe,
   ],
   imports: [
     BrowserModule,

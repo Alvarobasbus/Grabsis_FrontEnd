@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Egreso } from 'src/app/models/egreso';
+import { AuthService } from 'src/app/services/auth.service';
 import { EgresoService } from 'src/app/services/egreso.service';
 import Swal from 'sweetalert2';
 
@@ -13,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ListadoGastosComponent implements OnInit {
 
-  
+  isLogin: boolean=false;
   formulario: FormGroup;
   formulario2: FormGroup;
 
@@ -35,11 +37,19 @@ export class ListadoGastosComponent implements OnInit {
   private subscripcion =new Subscription();
 
   constructor(private formBuilder: FormBuilder,
-    private egresoService: EgresoService){
+    private egresoService: EgresoService,
+    private authService: AuthService,
+    private router: Router){
 
   }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.modi=false;
     this.busqueda=true;
     this.resul=false;

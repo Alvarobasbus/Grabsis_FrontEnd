@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { Turno } from 'src/app/models/turno';
+import { AuthService } from 'src/app/services/auth.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import Swal from 'sweetalert2';
 
@@ -28,14 +30,28 @@ export class ListadoTurnosComponent implements OnInit{
   hoy= new Date;
   
   filterTurno: any = '';
+  isLogin: boolean=false;
+currentID: number=0;
+empleado: Empleado;
 
 
   constructor(private turnoservice: TurnoService,
-    private datePipe: DatePipe, private formBuilder: FormBuilder, private router: Router){
+    private datePipe: DatePipe, private formBuilder: FormBuilder, private router: Router,
+    private authService: AuthService){
 
   }
 
   ngOnInit(): void {
+
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+    this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
+      this.empleado = currentEmpleado;
+      this.currentID= this.empleado.idEmpleado
+    })
+
+  if(this.isLogin==false){
+      this.router.navigate(['']);
+    }
     this.formulario=this.formBuilder.group({
       fecha1: [, Validators.required],
       fecha2: [, Validators.required]

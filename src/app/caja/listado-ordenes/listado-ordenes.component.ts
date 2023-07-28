@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Detalle } from 'src/app/models/detalle';
 import { Empleado } from 'src/app/models/empleado';
@@ -43,7 +44,7 @@ export class ListadoOrdenesComponent implements OnInit {
   listaServicios: Servicio[]=[];
   listaAuxDetalle: Detalle[]=[];
   auxDetalle: Detalle
-
+  isLogin: boolean=false;
   listaDetalle: Detalle[]=[];
 
   faltaDetalle: boolean;
@@ -56,10 +57,17 @@ export class ListadoOrdenesComponent implements OnInit {
     private ordenService: OrdenService,
     private detalleService: DetalleService,
     private authService: AuthService,
+    private router: Router,
     private servicioService: ServiciosService){
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.traerServiciosYDetalles()
     this.faltaDetalle=false;
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{

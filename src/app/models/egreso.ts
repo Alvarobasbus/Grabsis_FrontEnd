@@ -1,7 +1,7 @@
 export class Egreso{
     idEgreso: number;
     fecha: Date;
-    importe: number;
+    importe: string;
     concepto: string;
     numeroFactura: string;
     tipoFactura: string;

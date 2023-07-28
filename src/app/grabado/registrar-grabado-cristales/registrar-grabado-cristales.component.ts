@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Detalle } from 'src/app/models/detalle';
 import { Empleado } from 'src/app/models/empleado';
@@ -39,6 +40,7 @@ export class RegistrarGrabadoCristalesComponent implements OnInit {
   orden: Orden;
   detalles: Detalle[];
   grabado: Grabado;
+  isLogin: boolean=false;
 
 
 
@@ -47,11 +49,18 @@ export class RegistrarGrabadoCristalesComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private detalleService: DetalleService,
-    private grabadoService: GrabadoService){
+    private grabadoService: GrabadoService,
+    private router: Router){
 
   }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.traerDetalles()
 
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{

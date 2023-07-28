@@ -61,7 +61,7 @@ export class GenerarOrdenComponent implements OnInit {
   formularioUsuario: FormGroup;
   provincias: Provincia[];
   usuario: Usuario;
-
+  isLogin: boolean=false;
   ordenGenerada: Orden;
 
   filter: string = '';
@@ -89,6 +89,12 @@ export class GenerarOrdenComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.mp=false;
     this.pagoExito=false;
     this.formulario=this.formBuilder.group({

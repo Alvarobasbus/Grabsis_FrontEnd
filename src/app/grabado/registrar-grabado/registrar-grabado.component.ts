@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Detalle } from 'src/app/models/detalle';
 import { Empleado } from 'src/app/models/empleado';
@@ -27,6 +28,7 @@ export class RegistrarGrabadoComponent implements OnInit {
   empleadoLog: Empleado;
 
   filter: any = '';
+  isLogin: boolean=false;
   
   hoy= new Date;
   pipe = new DatePipe('en-US');
@@ -50,12 +52,19 @@ export class RegistrarGrabadoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private detalleService: DetalleService,
-    private grabadoService: GrabadoService){
+    private grabadoService: GrabadoService,
+    private router: Router){
 
   }
 
   ngOnInit(): void {
     this.traerDetalles()
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
 
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
       this.empleadoLog = currentEmpleado;

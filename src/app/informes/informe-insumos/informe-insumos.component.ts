@@ -8,6 +8,9 @@ import { InformeInsumos } from 'src/app/models/informeInsumos';
 import { InformeServicios } from 'src/app/models/informeServicios';
 import { InformesService } from 'src/app/services/informes.service';
 import Swal from 'sweetalert2';
+import { Empleado } from 'src/app/models/empleado';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 Chart.register(...registerables);
 
 @Component({
@@ -26,6 +29,9 @@ export class InformeInsumosComponent implements OnInit{
   fechaHoy:any;
 
   grafico: Chart;
+  isLogin: boolean=false;
+  currentID: number=0;
+  empleado: Empleado;
 
 
   primer: any;
@@ -50,7 +56,9 @@ export class InformeInsumosComponent implements OnInit{
   public page: number;
 
   constructor(private formBuilder: FormBuilder,
-    private informeService: InformesService
+    private informeService: InformesService,
+    private authService: AuthService,
+    private router: Router
     ){
 
   }
@@ -61,6 +69,12 @@ export class InformeInsumosComponent implements OnInit{
 
   ngOnInit(): void {
     
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.formulario=this.formBuilder.group({
       fecha1: [, Validators.required],
       fecha2: [, Validators.required],

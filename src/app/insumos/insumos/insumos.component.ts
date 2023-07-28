@@ -33,6 +33,9 @@ export class InsumosComponent implements OnInit {
   detalle: DetalleInsumo;
   filter: any = '';
   modi:boolean;
+  isLogin: boolean=false;
+  currentID: number=0;
+  empleado: Empleado;
 
   public page: number;
   
@@ -46,6 +49,12 @@ export class InsumosComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.modi=false;
 
     this.authService.currentEmpleado$.subscribe( currentEmpleado =>{

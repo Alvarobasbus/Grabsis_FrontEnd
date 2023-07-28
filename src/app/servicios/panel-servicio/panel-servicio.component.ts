@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { Servicio } from 'src/app/models/servicio';
+import { PrecioPipe } from 'src/app/pipes/precio.pipe';
+import { PreciosinsPipe } from 'src/app/pipes/preciosins.pipe';
+import { AuthService } from 'src/app/services/auth.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import Swal from 'sweetalert2';
 
@@ -18,16 +22,29 @@ export class PanelServicioComponent implements OnInit {
   servicios: Servicio[];
   servicio: Servicio;
   servicio2: Servicio;
+  isLogin: boolean=false;
+currentID: number=0;
+empleado: Empleado;
 
   private subscripcion =new Subscription();
 
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private serviciosService: ServiciosService){
+    private serviciosService: ServiciosService,
+    private authService: AuthService){
 
   }
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+    this.authService.currentEmpleado$.subscribe( currentEmpleado =>{
+      this.empleado = currentEmpleado;
+      this.currentID= this.empleado.idEmpleado
+    })
+
+  if(this.isLogin==false){
+      this.router.navigate(['']);
+    }
     this.formulario=this.formBuilder.group({
       descripcion: [, Validators.required],
       precio: [, Validators.required]
@@ -54,8 +71,11 @@ export class PanelServicioComponent implements OnInit {
           if(valor!=0){
             this.serviciosService.obtenerPorId(valor).subscribe({
               next: (respuesta) =>{
+                let filterpipe2= new PreciosinsPipe()
                 this.servicio2 = respuesta
                 this.formActualizar.controls['precio'].setValue(this.servicio2.precio)
+               // this.formActualizar.controls['precio'].setValue(this.servicio2.precio)
+               
    
               },
               error: () => console.log('error al intentar traer el servicio seleccionado')

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Egreso } from 'src/app/models/egreso';
+import { AuthService } from 'src/app/services/auth.service';
 import { EgresoService } from 'src/app/services/egreso.service';
 import Swal from 'sweetalert2';
 
@@ -15,13 +17,22 @@ export class AgregarEgresoComponent implements OnInit {
 
   formulario: FormGroup;
   egreso: Egreso;
-
+  isLogin: boolean=false;
   private subscripcion =new Subscription();
 
-  constructor(private egresoService: EgresoService, private formBuilder: FormBuilder){
+  constructor(private egresoService: EgresoService, private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router){
 
   }
   ngOnInit(): void {
+
+    this.authService.isLoggedIn$.subscribe(respuesta => this.isLogin=respuesta)
+ 
+
+    if(this.isLogin==false){
+        this.router.navigate(['']);
+      }
     this.formulario=this.formBuilder.group({
       fecha: [, Validators.required],
       numeroFactura: [, Validators.required],
@@ -58,8 +69,9 @@ export class AgregarEgresoComponent implements OnInit {
     }
     this.egreso=this.formulario.value
     this.egreso.concepto.toUpperCase();
+    console.log(this.formulario.controls['importe'].value)
     
-
+    
     this.subscripcion.add(
       this.egresoService.guardar(this.egreso).subscribe({
         next: respuesta =>{
@@ -84,5 +96,6 @@ export class AgregarEgresoComponent implements OnInit {
     )
     
   }
+  
 
 }

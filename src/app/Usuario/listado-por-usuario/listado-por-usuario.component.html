@@ -104,6 +104,7 @@
                                     <td>{{ lst.vehiculo.modelo }}</td>
                                     
                                     <td *ngIf="lst.pagado">FINALIZADO</td>
+                                    <td *ngIf="!lst.pagado && lst.isDeleted && !lst.ingreso">CANCELADO</td>
                                     <td *ngIf="!lst.pagado && lst.isDeleted && lst.ingreso">CANCELADO</td>
                                     <td *ngIf="!lst.pagado && !lst.isDeleted && lst.ingreso">PENDIENTE</td>
                                     <td *ngIf="!lst.pagado && !lst.isDeleted && !lst.ingreso">NO CONCURRIO</td>
